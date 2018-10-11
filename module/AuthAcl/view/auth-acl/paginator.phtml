@@ -1,0 +1,74 @@
+<style>
+.pagination > li:first-child > a, .pagination > li:first-child > span,.pagination > li > a, .pagination > li > span,.pagination>.active>a,  .pagination > li > span,.pagination > li:last-child > a, .pagination > li:last-child > span{
+    width: 35px;height: 35px;border-radius: 50%;padding-top: 9px; font-size:12px;  font-family:'Oswald'; color:#4c4c4c !important;
+}
+.pagination>.active>a:focus, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{
+	color:#ffffff !important;
+}
+.pagination > li > a, .pagination > li > span{
+	margin-right:10px;
+}
+.pagination>.active>a{
+	color:#ffffff !important;  background-color:#fcd116; border:none;border: 1px solid #fcd116;
+}
+.pagination li a:hover{
+	background: #ffffff;border: 1px solid #dddddd;
+}
+.pagination > li:first-child > a,.pagination > li:last-child > a{
+	padding-left: 0; padding-right: 0;font-weight:bold;text-align:center;
+}
+.pagination > li:first-child > a span,.pagination > li:last-child > a span{font-weight:bold;font-size: 15px;}
+</style>
+<div class="col-sm-10 col-sm-offset-1 text-center">
+<?php 
+if ($this->pageCount){ ?>
+     <div>
+         <ul class="pagination">
+             <!-- Previous page link -->
+             <?php if (isset($this->previous)){ ?>
+                 <li>
+                     <a href="<?php echo $this->url($this->route); ?>/<?php echo $this->previous.'?'.$_SERVER['QUERY_STRING']; ?>">
+                         <span class="fa fa-angle-left"></span>
+                     </a>
+                 </li>
+             <?php } else { ?>
+                 <li class="disabled">
+                     <a href="#">
+                         <span class="fa fa-angle-left"></span>
+                     </a>
+                 </li>
+             <?php } ?>
+
+             <!-- Numbered page links -->
+             <?php foreach ($this->pagesInRange as $page){?>
+                 <?php if ($page != $this->current){?>
+                     <li>
+                         <a href="<?php echo $this->url($this->route);?>/<?php echo $page.'?'.$_SERVER['QUERY_STRING']; ?>">
+                             <?php echo $page; ?>
+                         </a>
+                     </li>
+                 <?php  } else {?>
+                     <li class="active">
+                         <a href="#"><?php echo $page; ?></a>
+                     </li>
+                 <?php } ?>
+             <?php } ?>
+
+             <!-- Next page link -->
+             <?php if (isset($this->next)){?>
+                 <li>
+                     <a href="<?php echo $this->url($this->route); ?>/<?php echo $this->next.'?'.$_SERVER['QUERY_STRING']; ?>">
+                          <span class="fa fa-angle-right"></span>
+                     </a>
+                 </li>
+             <?php } else{ ?>
+                 <li class="disabled">
+                     <a href="#">
+                          <span class="fa fa-angle-right"></span>
+                     </a>
+                 </li>
+             <?php } ?>
+         </ul>
+     </div>
+ <?php } ?>
+</div>

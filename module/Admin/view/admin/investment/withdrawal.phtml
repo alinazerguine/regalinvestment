@@ -1,0 +1,69 @@
+<style>
+.onoffswitch-inner:after {
+    content: "PENDING";font-size: 10px;
+}
+.onoffswitch-inner:before {
+    content: "APPROVED";
+    font-size: 10px;
+	padding-left:6px;
+}
+</style>
+<div class="page-header filled full-block light">
+	<h2><i><span class="<?php echo $this->page_icon ?>"></span>&nbsp;<?php echo $this->pageHeading ?></i></h2>
+</div>
+<div class="widget-wrap">
+	
+  <div class="widget-container">
+  	
+    <div class="widget-content">
+        <table id="sample_1" class="table table-striped table-bordered table-hover dataTable">
+          <thead>
+            <tr>
+               <th width="5%">S.No.</th>
+             
+            <th>User Name</th>
+            <th>Type</th>
+            <th>Amount / (Method)</th>
+            <th>Requested On</th>
+            <th>Status</th>
+             <?php /*?> 
+              <th width="8%">Edit</th><?php */?>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" charset="utf-8">
+var transx='<?php echo $this->transx?>';
+$(document).ready(function(e) {
+	$('#sample_1').dataTable( {
+		"bProcessing": true,
+		"bServerSide": false,
+		"responsive": true,
+ 		"sAjaxSource": "<?php echo APPLICATION_URL.'/'.BACKEND?>/getwithdrawal/1/"+transx ,
+		"aaSorting": [[ 0, "desc" ]],
+		"aoColumnDefs": 
+		 [
+			{ "bSortable": false, "aTargets": [1,5] },
+ 		 
+		 ],
+		"iDisplayLength":50,
+	    "aLengthMenu": [[50, 100, 500, -1], [50, 100, 500, "All"]],
+		"fnInitComplete": function (oSettings, json) { re_init();}
+	} );
+	
+});
+function approvetransaction(tranxs){
+	var response=confirm("Are you sure you want to process transaction");
+	if (response == true) {
+		window.location.href='<?php echo APPLICATION_URL.'/'.BACKEND?>/approvetransaction/'+tranxs;
+		return true;
+	}
+	return response;
+}
+
+
+</script>

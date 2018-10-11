@@ -1,0 +1,108 @@
+<?php 
+
+?>
+<aside class="sidebar-left-collapse profile-sidebar">
+<div class="container-fluid" style="max-width:1349px;margin:0 auto;">
+		<?php 
+		$subHeadTxt="we provide best you...";
+		if($this->layout()->CURRENT_CONTROLLER=="ProfileController" && $this->layout()->CURRENT_ACTION=='dashboard'){?>
+        	<?php $subHeadTxt='in order to receive blessings, we must spread them.';?>
+		<div class="company-logo">
+       
+        <div class="props-level" style="position:relative;">
+        	<div class="props-level-number" data-toggle="tooltip" title="Your prosperity level is <?php echo $this->tot_Prosperity?>">
+        		<?php echo $this->tot_Prosperity?>
+            </div>
+        </div>
+        </div>
+        <? }else{?>
+        <a class="company-logo">
+        <img src="<?=getUserImage($this->userData['user_image'],"160")?>" class="profile-image" />
+        </a>
+	<? }?>
+		<div class="sidebar-links" style="min-height:155px;position:relative;vertical-align: bottom;">
+        <div class="makediv" style="">
+        <div class="staticTextBlock">
+        				
+    						<?php echo $this->pageHeading?><sub><b class="staticsubTextBlock">&nbsp;<?php echo $subHeadTxt?><i class="<?php echo $this->pageIcon?>" aria-hidden="true"></i></b></sub>
+       					 </div>
+       </div>
+       <nav role="navigation" class="makediv">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle x collapsed" data-toggle="collapse" data-target="#navbar-collapse-x">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+
+</div>
+
+<div class="collapse navbar-collapse" id="navbar-collapse-x">
+<ul class="nav navbar-nav makediv navcontainer">
+			<li class="navLink">
+				 <a href="<?php echo $this->url('front_dashboard')?>" data-title="front_dashboard">
+					<i class="fa fa-tachometer"></i>Dashboard
+				</a>
+			</li>
+			<li class="navLink">
+				 <a href="<?php echo $this->url('profile')?>" data-title="account">
+					<i class="fa fa-heart-o"></i>Profile
+				</a>
+			</li>
+			<?php if($this->loggedUser->user_oauth_provider!='facebook' && $this->loggedUser->user_oauth_provider!='twitter' && $this->loggedUser->user_oauth_provider!='googleplus'){?>
+			<li class="navLink">
+
+				<a href="<?php echo $this->url('changepassword')?>" data-title="change_password">
+					<i class="fa fa-lock"></i>Password
+				</a>
+			</li>
+            <li class="navLink">
+
+				<a href="<?php echo $this->url('front_send_consult_request')?>" data-title="consulting_request">
+					<i class="fa fa-paper-plane"></i>Consulting Request
+				</a>
+			</li>
+            <li class="navLink">
+				<a href="<?php echo $this->url('front_deposit')?>" data-title="deposit">
+					<i class="fa fa-money"></i>Add Funds
+				</a>
+			</li>
+             <li class="navLink">
+				<a href="<?php echo $this->url('front_withdraw')?>" data-title="withdraw">
+					<i class="fa fa-money"></i>Withdraw 
+				</a>
+			</li>
+             <li class="navLink">
+				<a href="<?php echo $this->url('front_portfolio')?>" data-title="portfolio">
+					<i class="fa fa-briefcase"></i>Portfolio 
+				</a>
+			</li>
+            
+            <? }?>
+</ul>
+</div><!-- .navbar-collapse -->
+</nav>
+        	
+            
+          
+			
+
+		</div>
+</div>
+	</aside>
+
+    <script>
+    $(document).ready(function(e){$('a[data-title="<?php echo $this->pageType?>"]').closest('li').addClass("selected");});
+   	$(function () {
+
+			var links = $('.sidebar-links > div');
+
+			links.on('click', function () {
+
+				links.removeClass('selected');
+				$(this).addClass('selected');
+
+			});
+		});
+
+	</script>

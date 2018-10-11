@@ -1,0 +1,52 @@
+<?php
+use Zend\Session\Container;
+use Application\Model\AbstractModel;
+$AbstractModel=new AbstractModel($this->DB_ADAPTER);
+$Front_User_Session = new Container(DEFAULT_AUTH_NAMESPACE);		
+$loggedUser=$Front_User_Session['loggedUser'];
+
+$controller = @$this->getHelperPluginManager()->getServiceLocator()->get('application')->getMvcEvent()->getRouteMatch()->getParam('controller');
+$current_action = @$this->getHelperPluginManager()->getServiceLocator()->get('application')->getMvcEvent()->getRouteMatch()->getParam('action');
+$controller1= $controller;
+
+$controller1 = explode('\\', $controller1);
+$current_module = $controller1[0];
+$current_controller = @array_pop(explode('\\', $controller));	
+$SuperModel = $AbstractModel;
+$sliderData=$SuperModel->Super_Get("slider","slider_status='1'","fetchAll");
+?>
+
+<div id="myCarousel" class="carousel slide Clear">
+	<div class="carousel-inner">
+    	<?php 
+        $active = "active";
+		$h=0;
+        foreach($sliderData as $values){
+		?>
+        <div class="item <?php if($h==0){echo $active;}?>">
+        	<img src="<?php echo HTTP_SLIDER_IMAGES_PATH?>/1200/<?php echo $values['slider_path']?>" class="img-responsive" style="width:100%;" alt="<?php echo HTTP_SLIDER_IMAGES_PATH?>/<?php echo $values['slider_path']?>" />
+            <div class="carousel-caption">
+            	<?php echo $values['slider_title']?>
+            </div>
+        </div>
+        <? $h++;}?>
+            
+       
+	</div>
+    
+    <div class="VideoBox Cursor">
+        Watch Video
+    </div>
+    
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev"><img src="<?php echo HTTP_IMG_PATH?>/left_arrow.png" alt="<?php echo HTTP_IMG_PATH?>/left_arrow.png" /></a>
+	<a class="right carousel-control" href="#myCarousel" data-slide="next"><img src="<?php echo HTTP_IMG_PATH?>/right_arrow.png" alt="<?php echo HTTP_IMG_PATH?>/right_arrow.png" /></a>
+</div>
+
+<script type="application/x-javascript">
+$(document).ready(function(e){
+	$('.carousel').carousel({
+		interval: 10000,
+		pause:"false"
+	});
+});
+</script>

@@ -1,0 +1,47 @@
+
+<div style="margin:30px !important;">
+	<div class="row margin0">
+	<div class="col-md-12 padding0">
+ 		<div class="portlet">
+			<div class="portlet-body">
+				<form method="post" action="<?php //echo $this->url(array(),'admin_delete_page')?>"  onsubmit="return checkSelects();" >
+ 				<table id="sample_1" class="table table-striped table-bordered table-hover dataTable">
+					<thead>
+						<tr>
+							<th width="5%">Id</th>
+							<th>Page Title</th>
+							<th width="14%">Last Modified</th>
+							<th width="8%">Edit</th>
+							<th width="8%">View</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+				</form>
+			</div>
+		</div>		
+  	</div>
+ </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+$(document)	 .ready(function(e) {
+	$('#sample_1').dataTable( {
+		"bProcessing": true,
+		"bServerSide": false,
+		"responsive": true,
+ 		"sAjaxSource": "<?php echo APPLICATION_URL.'/'.BACKEND?>/getpagesindex" ,
+		"aoColumnDefs": 
+		 [
+			{ "bSortable": false, "aTargets": [1,3,4] },
+ 		 	
+		 ],
+		"iDisplayLength":50,
+	    "aLengthMenu": [[50, 100, 500, -1], [50, 100, 500, "All"]],
+		"fnInitComplete": function (oSettings, json) { re_init();}
+	} );
+});
+
+
+</script>

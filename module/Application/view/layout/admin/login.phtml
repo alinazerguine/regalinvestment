@@ -1,0 +1,142 @@
+<?php 
+$controller = @$this->getHelperPluginManager()->getServiceLocator()->get('application')->getMvcEvent()->getRouteMatch()->getParam('controller');
+$current_action = @$this->getHelperPluginManager()->getServiceLocator()->get('application')->getMvcEvent()->getRouteMatch()->getParam('action');
+$explode_controller = explode('\\', $controller);	
+$current_module = @$explode_controller[0];
+$current_controller = @array_pop(explode('\\', $controller));
+?>
+
+<script src="<?php echo PLUGIN_PATH?>/backstretch/jquery.backstretch.min.js"></script> 
+<section class="login-container boxed-login">
+    <div class="container">
+        <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4">
+            <div class="LoginFormOuter">
+                <div class="login-form-container" style="border-radius:0px;">
+                    <div class="text-center">
+                    <img src="<?php echo HTTP_IMG_PATH?>/logo.png" style=" margin:0px auto 30px auto;max-width:100%;" />
+                </div>
+                	<?php 
+					$id="forms-login";
+					if($current_action=='resetpassword'){
+						$id="";
+					}?>
+                    <form action="" method="post" class="profile_form j-forms" id="<?php echo $id?>" novalidate>
+                        <div class="login-form-header">
+                            
+                        </div>
+                        
+                        <?php if($current_action=='login'){?>
+                        <div class="login-form-content">             
+                            <!-- start login -->
+                            <div class="unit">
+                                <div class="input login-input form-group">
+                                    <label class="icon-left" for="login"> <i class="fa fa-user"></i> </label>
+                                    <?= $this->formElement($form->get('user_email')); ?>
+                                </div>
+                            </div>
+                            <!-- end login -->             
+                            <!-- start password -->
+                            <div class="unit">
+                                <div class="input login-input form-group">
+                                    <label class="icon-left" for="password"> <i class="fa fa-key"></i> </label>
+                                    <?= $this->formElement($form->get('user_password')); ?>
+                                    <span class="hint text-right"> <a href="<?=$this->url('forgotpassword', array('action' => 'forgotpassword'))?>" class="link">Forgot password?</a> </span> 
+                                </div>
+                            </div>
+                            <!-- end password -->             
+                            <!-- start response from server -->
+                            <div class="response"></div>
+                            <!-- end response from server --> 
+                        </div>
+                        
+                        <div class="login-form-footer text-center">
+                            <button type="submit" class="SiteButton btn">Sign in</button>
+                        </div>
+                        
+                        <? }else if($current_action=='forgotpassword'){?>
+                        <div class="login-form-content">             
+                            <!-- start login -->
+                            <div class="unit">
+                                <div class="input login-input form-group">
+                                    <label class="icon-left" for="login"> <i class="fa fa-envelope"></i> </label>
+                                    <?= $this->formElement($form->get('user_email')); ?>
+                                </div>
+                            </div>
+                            <!-- end login -->             
+                            
+                            <!-- start response from server -->
+                            <div class="response">
+                                <span class="hint text-right"> <a href="<?=$this->url('adminlogin')?>" class="link">Login?</a> </span>
+                            </div>
+                            <!-- end response from server --> 
+                        </div>
+                        
+                         <div class="login-form-footer text-center">
+                            <button type="submit" class="SiteButton btn">Submit</button>
+                        </div>
+                        
+                        <? }else if($current_action=='resetpassword'){?>
+                        <div class="login-form-content">             
+                            <!-- start login -->
+                            <div class="unit">
+                                <div class="input login-input form-group">
+                                    <label class="icon-left" for="login"> <i class="fa fa-key"></i> </label>
+                                    <?= $this->formElement($form->get('user_password')); ?>
+                                </div>
+                            </div>
+                            
+                            <div class="unit">
+                                <div class="input login-input form-group">
+                                    <label class="icon-left" for="login"> <i class="fa fa-key"></i> </label>
+                                    <?= $this->formElement($form->get('user_rpassword')); ?>
+                                </div>
+                            </div>
+                            <!-- end login -->             
+                            
+                            <!-- start response from server -->
+                            <div class="response"></div>
+                            <!-- end response from server --> 
+                        </div>
+                        
+                         <div class="login-form-footer text-center">
+                            <button type="submit" class="SiteButton btn">Reset Password</button>
+                        </div>
+                        <? }?>
+                        
+                    </form>
+                    
+                </div>
+                <div class="login-page-footer">
+                        <div class="">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="footer-content"> <span class="footer-meta"> <?=$this->SITE_CONFIG['site_title']?> &copy; <?php echo gmdate('Y')?></span> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+            </div>
+        </div>
+    </div>
+    
+   
+</section>
+
+
+
+<!--Page Container Start Here-->
+
+
+
+<script type="application/javascript">
+$(document).ready(function() {	
+	$.backstretch([
+	baseUrl+"/public/img/login_bg/1.jpg",
+	baseUrl+"/public/img/login_bg/2.jpg",
+	baseUrl+"/public/img/login_bg/3.jpg",				  
+	], {
+		fade: 1000,
+		duration: 8000
+	});
+});
+</script>

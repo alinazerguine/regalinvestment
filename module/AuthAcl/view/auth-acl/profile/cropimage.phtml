@@ -1,0 +1,57 @@
+<div id="grad" class="animated fadeIn">
+<div class="makediv relative">
+<?php echo $this->render("auth-acl/profile/_profile_side_bar.phtml");?>
+
+
+	<div class="main-content" >
+
+		<div class="menu">
+        		<div class="ProfileConDiv">
+					<div class="col-sm-12">
+                <div class="col-sm-12 text-center">
+                <form action="" method="post" class="profile_form" enctype="multipart/form-data">
+                	<div class="fileinput fileinput-new" data-provides="fileinput">
+                        <div class="fileinput-preview thumbnail PaddingZero" style="max-width: 250px; max-height: 250px;min-height:20px;padding:0px;">
+                            <img src="<?php echo getUserImage($this->loggedUser->user_image,"thumb")?>" alt=""/>
+                        </div>
+                        
+                        <div>
+                            <span class="btn btn-xs btn-info btn-file">
+                                <span class="fileinput-new"> Select Profile Image </span><span class="OrangeStar">*</span>
+                                
+                                <span class="fileinput-exists"> Change </span>
+                                <?php echo $this->formElement($form->get('user_image'))?>
+                            </span>
+                            
+                            
+                            <input type="hidden" name="rotate" id="rotate" value="0" />
+                            <a href="#" class="btn btn-xs btn-danger default fileinput-exists" data-dismiss="fileinput">Remove</a><br />
+                            <small style="color: #ffffff;margin-left: 10px;">A visible photo of your face is required.</small>
+                        </div>
+					</div>
+                    
+					<p class="clearfix">&nbsp;</p>
+					
+					<?php echo $this->formElement($form->get('bttnsubmit'))?>
+				</form>
+				
+                </div>
+        	</div>
+				</div>
+
+		</div>
+
+	</div>
+    </div>
+   </div>
+
+<script type="text/javascript">
+
+$(document).ready(function(e) {
+    if("<?php echo $this->loggedUser->user_image?>"!=''){
+		$("#user_image").removeAttr("required");
+		$("#user_image").removeClass("required");
+	}
+});
+
+</script> 

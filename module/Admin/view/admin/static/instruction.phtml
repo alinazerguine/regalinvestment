@@ -1,0 +1,44 @@
+<div class="page-header filled full-block light">
+	<h2><i><span class="<?php echo $this->page_icon ?>"></span>&nbsp;<?php echo $this->pageHeading ?></i></h2>
+</div>
+<div class="widget-wrap">
+	
+  <div class="widget-container">
+  	
+    <div class="widget-content">
+        <table id="sample_1" class="table table-striped table-bordered table-hover dataTable">
+          <thead>
+            <tr>
+               <th width="5%">S.No.</th>
+             
+              <th width="40%">Title</th>
+              <th width="14%">Last Modified</th>
+              <th width="8%">Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" charset="utf-8">
+$(document)	 .ready(function(e) {
+	$('#sample_1').dataTable( {
+		"bProcessing": true,
+		"bServerSide": false,
+		"responsive": true,
+ 		"sAjaxSource": "<?php echo APPLICATION_URL.'/'.BACKEND?>/getpages/1" ,
+		"aoColumnDefs": 
+		 [
+			{ "bSortable": false, "aTargets": [1,3] },
+ 		 
+		 ],
+		"iDisplayLength":50,
+	    "aLengthMenu": [[50, 100, 500, -1], [50, 100, 500, "All"]],
+		"fnInitComplete": function (oSettings, json) { re_init();}
+	} );
+});
+
+
+</script>

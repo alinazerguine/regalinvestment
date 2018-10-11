@@ -1,0 +1,265 @@
+
+<div id="grad" class="animated fadeIn element_block">
+<div class="makediv relative">
+<?php echo $this->render("auth-acl/profile/_profile_side_bar.phtml"); ?>
+
+
+	<div class="main-content container" >
+
+		<div class="menu">
+       
+				<form action="" method="post" class="profile_form" enctype="multipart/form-data" id="profileFormDiv">
+                   		<div class="col-sm-12 contentborder lastelem paddleft0"  style="margin-top:60px;">
+                    				<div class="pull-left BlackHead" ><h3><b>Fund Account</b></h3></div>
+                                    <?php $number_balance=number_format($this->userData['user_balance'], 2, '.', ',');?>
+        							 <div class="pull-right BlackHead">
+                         					<h3><b>Balance : <?php echo $this->userData['user_balance'] > 0?PRICE_SYMBOL.($number_balance):'0.00'?></b></h3>
+                        		 </div>
+                                    
+                                    
+                   			</div>
+                            <div class="clearfix">&nbsp;</div>
+                         <div class="ProfileConDiv inlineform" style="margin-top:10px;">
+                         
+                         <div class="panel-body" align="left" >
+                         	<div class="col-sm-12">
+                            
+                         		<div class="clearfix">&nbsp;</div>
+                       
+                                   <div class="makediv depositbox" style="max-width:500px;border:none;">
+                                   		 <div class="col-sm-12 col-xs-12 lastelem form-group">
+                                        <label for="Deposit">Deposit Amount</label>
+                                        <div>
+										<?php echo $this->formElement($form->get('deposit_amount'))?>
+                                    	</div>
+                                    </div>
+                                    
+                                    <div class="col-sm-12 col-xs-12 lastelem form-group ">
+                                        <label for="Currency">Currency</label>
+                                         <div>
+										<?php echo $this->formElement($form->get('deposit_currency'))?>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-xs-12 form-group lastelem">
+                                        <label for="Method">Method</label>
+                                         <div>
+										<?php echo $this->formElement($form->get('deposit_method'))?>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                                <div class="clearfix">&nbsp;</div>                 
+                             </div>    
+                              
+                              
+                              
+                              
+                                 <?php /*?><div class="makediv deposit-panel-container">
+                                 	 <div class="deposit-panel-inner">
+                                     	<div class="deposit-panel">
+                                       
+                                        <div class="deposit-check"><span class="fa fa-check-circle"></span></div>
+                                     	
+                                        <div>Your deposit request has been received.Your account will be funded once your deposit is processed.</div>									
+                                     	</div>
+                                     </div>
+                                 </div><?php */?>
+                                 
+								 <?php /*?><div class="makediv margtop30 TransferTable">
+                                 		<div class="col-sm-4 lastelem paddleft0">
+                                        	
+                                           
+                                    		  <div class="wire-tranfer-confirm">Wire Transfer Confirmation</div>
+                                              <div class="wire-tranfer-notify">Your notilication to Regal Investments to deposit {pay_currency} {pay_amount} via wire transfer has been confirmed.</div>
+											<div class="wire-tranfer-notify">To complete the actual transfer of funds, follow the Instruction below</div> 
+											<div>
+                                            	<div class="wire-instruction-head">Instruction</div>
+                                            	<ul class="wire-instruction">
+                                                            <li>Print this page by clicking the Print button below.</li>
+                                                            <li>Visit your bank and request the Wire transfer to your RI account.</li>
+                                                            <li>You must provde me following information to your bank to initiate the Wire Transfer.</li> 
+												</ul>
+                                            </div>
+													
+                                        </div>
+                                        <div class="col-sm-8">
+                                        		<div class="row">
+                                        		<div class="wire-tranfer-confirm text-center">Routing Details</div>
+                                                <table>
+                                                    <tr><td>Bank Name</td><td>The Bank of Montreal (SMO)</td></tr>
+                                                    <tr><td>Bank Address</td><td>591 Queen St W, Toronto, ON M5V 2B7</td></tr>
+                                                    <tr><td>SWIFT BIC Code</td><td>BOFM CA T2</td></tr>
+                                                    <tr><td>ABA Number</td><td>CC000103882</td></tr>
+                                                    <tr><td>Bank Account Name</td><td>Regal holdings Canada Inc</td></tr>
+                                                    <tr><td>Bank Account Address </td><td>250 Yonge St #2201 , Toronto, ON M5B 2L7 </td></tr>
+                                                    <tr><td>Bank Account Number  </td><td>038821995151 cr 038821995151 </td></tr>
+                                                    <tr><td>For further benefit to </td><td>{Customer name} </td></tr>
+
+                                                    
+                                                </table>
+                                                </div>
+                                                
+                                        </div>
+                                 </div><?php */?>
+                                                
+                                   
+                                       
+                                       <?php /*?><div class="makediv margtop30 TransferTable">
+                                 		<div class="col-sm-4 lastelem paddleft0">
+                                        	
+                                           
+                                    		  <div class="wire-tranfer-confirm">Interac E-Transfer Confirmation</div>
+                                              <div class="wire-tranfer-notify">Your notilication to Regal Investments to deposit {pay_currency} {pay_amount} via interac e-transfer has been confirmed.</div>
+											<div class="wire-tranfer-notify">To complete the actual transfer of funds, follow the Instruction below</div> 
+											<div>
+                                            	<div class="wire-instruction-head">Instruction</div>
+                                            	<ul class="wire-instruction">
+                                                            <li>Log in to your online bank.</li>
+                                                            <li>Initiate an interac e-transfer</li>
+                                                            <li>Notice: there is a sending and receiver limit on interac e-transfer, initiating the transfer cannot guarantee your account will be funded. </li> 
+												</ul>
+                                            </div>
+													
+                                        </div>
+                                        <div class="col-sm-8">
+                                        		<div class="row">
+                                        		<div class="wire-tranfer-confirm text-center">Interac e-transfer details</div>
+                                                <table>
+                                                    <tr><td>Receiving email</td><td>prosper@regDIinve5trnerits.ca</td></tr>
+                                                    <tr><td>Bank Address</td><td>591 Queen St W, Toronto, ON M5V 2B7</td></tr>
+                                                    <tr><td>SWIFT BIC Code</td><td>BOFM CA T2</td></tr>
+                                                    <tr><td>ABA Number</td><td>CC000103882</td></tr>
+                                                    <tr><td>Bank Account Name</td><td>Regal holdings Canada Inc</td></tr>
+                                                    <tr><td>Bank Account Address </td><td>250 Yonge St #2201 , Toronto, ON M5B 2L7 </td></tr>
+                                                    <tr><td>Bank Account Number  </td><td>038821995151 cr 038821995151 </td></tr>
+                                                    <tr><td>For further benefit to </td><td>{Customer name} </td></tr>
+
+                                                    
+                                                </table>
+                                                </div>
+                                                
+                                        </div>
+                                 </div><?php */?>               
+                                                 
+                                                
+                                                
+                                                
+                                                
+                                 
+                                      
+                               
+                    		</div>            
+                        				    
+                     	 </div>
+                    	<p class="clearfix">&nbsp;</p>
+                    	
+                  
+			
+              
+           <div class="ProfileConDiv confirmdepositDiv hide ">
+           			<div class="panel-body" align="left">
+                         	<div class="col-sm-12">
+            					<?php /*?><div class="makediv margtop30 TransferTable">
+                                 		<div class="col-sm-4 lastelem paddleft0">
+                                        	
+                                           
+                                    		  <div class="wire-tranfer-confirm">Check Deposit Confirmation</div>
+                                              <div class="wire-tranfer-notify">
+                                              Your notification to Regal Investments to deposit {pay_currency} {pay_amount} via check deposit has been confirmed. 							</div>
+											<div class="wire-tranfer-notify">To complete the actual transfer of funds, follow the instructions below.</div> 
+											<div>
+                                            	<div class="wire-instruction-head">Instructions:</div>
+                                            	<ul class="wire-instruction">
+                                                            <li>Make your check payable to <br />Regal Holdings Canada, Inc.</li>
+                                                         
+												</ul>
+                                            </div>
+													
+                                        </div>
+                                        <div class="col-sm-8">
+                                        		<div class="row">
+                                        		<div class="wire-tranfer-confirm text-center">Check Deposit Details</div>
+                                                <table>
+                                                    <tr><td>Payable To:</td><td>Regal Holdings Canada, Inc.</td></tr>
+                                                    <tr><td>Memo:</td><td>Regal Investments</td></tr>
+                                                  
+                                                    <tr><td>Mailing Address</td><td>Regal holdings Canada Inc<br />
+                                                    								250 Yonge St #2201<br />
+                                                   									 Toronto, ON M5B 2L7<br />
+                                                                                     Canada
+                                                                                      </td></tr>
+                                                   
+
+                                                    
+                                                </table>
+                                                </div>
+                                                
+                                        </div>
+                                 </div><?php */?>
+                                 <?php if(!empty($this->instrucation_list)){
+									 	foreach($this->instrucation_list as $ins_key=>$ins_value){?>
+												<div class="makediv confirm_instruct hide" id="confirm_<?php echo $ins_value["page_id"]?>">
+                                                	<?php echo $ins_value['page_content']?>
+                                                </div>
+										<? }
+										
+									}?>
+                                 
+                                 
+                                  <div class="clearfix">&nbsp;</div>
+                                    <div class="text-right"><?php echo $this->formElement($form->get('bttnsubmit'))?></div>
+                             </div>
+                        </div>
+			</div>
+            
+              </form>
+		</div>
+
+	</div>
+    </div>
+   </div>
+<?php global $currencyCode;?>
+<script>
+var currencyBox=[];
+var pagecontent={1:17,2:23,3:18};
+
+
+currencyBox=$.parseJSON('<?php echo json_encode($currencyCode)?>');
+$(document).ready(function(e) {
+	
+	$('#deposit_amount').keyup(function(e) {
+		
+    	changeinelement();
+	});   
+ 	
+	$('#deposit_currency').change(function(e) {
+        changeinelement();
+    });
+	$('#deposit_method').change(function(e) {
+        changeinelement();
+    });
+});
+function changeinelement(){
+	var deposit_amount=$('#deposit_amount').val();
+	var deposit_currency=$('#deposit_currency').val();
+	var deposit_method=$('#deposit_method').val();
+	var currency_code=currencyBox[deposit_currency]
+	var method_div='confirm_'+pagecontent[deposit_method];
+	$('.confirm_instruct').addClass('hide');
+	$('.confirmdepositDiv').addClass('hide');
+	if(deposit_amount > 0){
+		
+		$('#'+method_div+' .pay_currency').html(currency_code);
+		$('#'+method_div+' .pay_amount').html(deposit_amount);
+		
+	/*$('#'+method_div).html($('#'+method_div).html().replace('{pay_currency}',currency_code));
+	$('#'+method_div).html($('#'+method_div).html().replace('{pay_amount}',deposit_amount));*/
+	
+	$('.confirmdepositDiv').removeClass('hide');
+	$('#'+method_div).removeClass('hide');
+	}
+	
+	
+}
+
+</script>

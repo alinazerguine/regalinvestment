@@ -1,0 +1,61 @@
+<?php 
+	$controller = @$this->getHelperPluginManager()->getServiceLocator()->get('application')->getMvcEvent()->getRouteMatch()->getParam('controller');
+	$current_action = @$this->getHelperPluginManager()->getServiceLocator()->get('application')->getMvcEvent()->getRouteMatch()->getParam('action');
+	$explode_controller = explode('\\', $controller);	
+	$current_module = @$explode_controller[0];
+	$current_controller = @array_pop(explode('\\', $controller));		
+?>
+<script src="<?php echo APPLICATION_URL.'/public/plugins/jquery-migrate-1.2.1.min.js'?>"></script>   
+<script src="<?php echo FRONT_JS?>/bootstrap.js"></script> 
+<script src="<?php echo ASSET_JS?>/jquery.ui.js"></script> 
+<script src="<?php echo ASSET_JS?>/jRespond.js"></script>     
+
+<script src="<?php echo ASSET_JS?>/nav.accordion.js"></script> 
+<script src="<?php echo ASSET_JS?>/hover.intent.js"></script> 
+<script src="<?php echo ASSET_JS?>/hammerjs.js"></script> 
+<script src="<?php echo ASSET_JS?>/jquery.hammer.js"></script> 
+<script src="<?php echo ASSET_JS?>/jquery.fitvids.js"></script> 
+<script src="<?php echo ASSET_JS?>/scrollup.js"></script> 
+<script src="<?php echo ASSET_JS?>/smoothscroll.js"></script> 
+<script src="<?php echo ASSET_JS?>/jquery.slimscroll.js"></script> 
+
+<script src="<?php echo ASSET_JS?>/velocity.js"></script> 
+<script src="<?php echo ASSET_JS?>/smart-resize.js"></script> 
+
+<!--iCheck--> 
+<script src="<?php echo ASSET_JS?>/icheck.js"></script> 
+<script src="<?php echo ASSET_JS?>/jquery.switch.button.js"></script> 
+
+<script type="text/javascript" src="<?=PLUGIN_PATH?>/datatables/media/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="<?=PLUGIN_PATH?>/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+<script type="text/javascript" src="<?=PLUGIN_PATH?>/datatables/extensions/TableTools/js/dataTables.tableTools.min.js"></script>
+<script type="text/javascript" src="<?=PLUGIN_PATH?>/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<!--Forms--> 
+<script src="<?php echo ASSET_JS?>/jquery.maskedinput.js"></script> 
+
+<script type="text/javascript" src="<?=PLUGIN_PATH?>/jquery-validation/js/jquery.validate.min.js?<?=time()?>"></script>
+<script type="text/javascript" src="<?=PLUGIN_PATH?>/jquery-validation/js/additional-methods.min.js?<?=time()?>"></script>
+<script type="text/javascript" src="<?=PLUGIN_PATH?>/blockui/jquery.blockui.min.js?<?=time()?>"></script>
+<script type="text/javascript" src="<?=PLUGIN_PATH?>/ckeditor/ckeditor.js"></script>
+
+<script src="<?=ASSET_JS?>/bootstrap-notify.js"></script>
+<script src="<?php echo ASSET_JS?>/apps.js"></script>
+<script type="text/javascript" src="<?=ASSET_JS?>/general.js?<?=time()?>"></script>
+<script type="text/javascript" src="<?=ASSET_JS?>/sitepage.js?<?=time()?>"></script>
+<script src="<?=ASSET_JS?>/video.js"></script>
+<script src="<?=ASSET_JS?>/videojs-ie8.min.js"></script>
+
+
+<?php if($current_controller=="IndexController" && $current_action=="dashboard"){?>
+	<script type="text/javascript" src="<?=FRONT_JS?>/highcharts.js"></script>
+	<script type="text/javascript" src="<?=FRONT_JS?>/funnel.js"></script>
+<? }?>
+
+<?php if($current_controller=="UserController" && $current_action=="account"){?>
+    <script type="text/javascript" src="<?=ASSET_JS?>/highcharts.js"></script>
+    <script type="text/javascript" src="<?=ASSET_JS?>/exporting.js"></script>
+<? }?>
+
+<?php if($current_controller=="ConsultingrequestController" && $current_action=="consavailabletimesetting"){?>
+	<script type="text/javascript" src="<?=PLUGIN_PATH?>/bootstrap-datetimepicker1/jquery.datetimepicker.js"></script>
+<? }?>

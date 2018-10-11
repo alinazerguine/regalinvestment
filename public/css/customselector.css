@@ -1,0 +1,54 @@
+@charset "utf-8";
+/* CSS Document */
+
+.customcheckbox input[type="checkbox"],.customcheckbox input[type="radio"]{
+  vertical-align:middle;
+  opacity:0;
+}
+.customcheckbox input[type="checkbox"]+span,.customcheckbox input[type="radio"]+span{
+  cursor:pointer;
+}
+.customcheckbox input[type="checkbox"]+span:before,.customcheckbox input[type="radio"]+span:before{
+  content:"";
+  display:inline-block;
+  height:19px;
+  
+  vertical-align:middle;
+  width:19px;
+}
+.customcheckbox input[type="checkbox"]+span:before{
+  width: 15px;
+  height: 15px;
+  background: #eaeaea;
+  border: 1px solid #cdcdcd;
+  position: relative;
+  
+  margin-right: 5px;
+  display: inline-block;
+	/*background: url("../img/checkbox.svg") center center no-repeat #f77d24;
+  border-color: #f77d24;*/
+ /* background:url(http://d3pr5r64n04s3o.cloudfront.net/tuts/391_checkboxes/check_radio_sheet.png)left top no-repeat;*/
+}
+.customcheckbox input[type="checkbox"]:checked+span:before{
+	
+	background: url("../img/checkbox.svg") center center no-repeat #f77d24; border-color: #f77d24;
+	background-position:initial;
+ /* background:url(http://d3pr5r64n04s3o.cloudfront.net/tuts/391_checkboxes/check_radio_sheet.png)-19px top no-repeat;*/
+}
+.customcheckbox input[type="radio"]+span:before{
+  /*background:url(http://d3pr5r64n04s3o.cloudfront.net/tuts/391_checkboxes/check_radio_sheet.png)-38px top no-repeat;*/
+	width: 16px;
+	height: 16px;
+	background: #eaeaea;
+	border: 1px solid #cdcdcd;
+	position: relative;
+	
+	margin-right: 5px;
+	display: inline-block;
+	border-radius: 100%;
+    -webkit-border-radius: 100%;
+}
+.customcheckbox input[type="radio"]:checked+span:before{
+  /*background:url(http://d3pr5r64n04s3o.cloudfront.net/tuts/391_checkboxes/check_radio_sheet.png)-57px top no-repeat;*/
+  background: url("../img/radiobox.svg") center center no-repeat #eaeaea; border-color: #f77d24;
+}

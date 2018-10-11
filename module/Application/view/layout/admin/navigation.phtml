@@ -1,0 +1,58 @@
+<?php
+use Zend\Session\Container;
+$session = new Container(ADMIN_AUTH_NAMESPACE);
+$adminData = $session['adminData'];
+?>
+
+<style>
+
+.leftbar li.active > ul.sub-menu.ShowNav{
+	background-color: rgba(0, 0, 0, 0.05);
+	webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+	display:block !important;
+}
+.list-accordion li ul li.active a{color:#07b107 !important}
+</style>
+
+<!--Leftbar Start Here-->
+<aside class="leftbar material-leftbar" style="height: 221px;">
+    <div class="left-aside-container" style="overflow: hidden; width: 250px; height: 221px;">
+        <div class="user-profile-container">
+            <div class="user-profile clearfix">
+                <div class="admin-user-thumb">
+                    <img src="<?php echo getUserImage($adminData['user_image'],'160')?>" alt="admin">
+                </div>
+                <div class="admin-user-info">
+                    <ul>
+                        <li><a href="#"><?php echo $adminData['user_name'] ?></a></li>
+                        <li><a href="#"><?php echo $adminData['user_email'] ?></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="admin-bar">
+                <ul>
+                	<li><a href="<?php echo $this->url('adminlogout')?>" title="Logout"><i class="zmdi zmdi-power"></i></a></li>
+                	<li><a href="<?php echo $this->url('adminprofile')?>"  title="Update Profile"><i class="zmdi zmdi-account"></i></a></li>
+                	<li><a href="<?php echo $this->url('adminpassword')?>" title="Change Password"><i class="zmdi zmdi-key"></i></a></li>
+                	<!--<li><a href="<?php echo $this->url('adminprofile')?>"><i class="zmdi zmdi-settings"></i></a></li>-->
+                </ul>
+            </div>
+        </div>
+        <ul class="list-accordion">
+            <?php echo $this->render('menu.phtml'); ?>
+        </ul>
+    </div>
+</aside>
+
+<script>
+$(document).ready(function(e) { 
+  $("li.active").children("ul.sub-menu").addClass('ShowNav', 1000 );
+});
+
+$("li.has-sub").click(function(e) {
+	$("li.active").children("ul.sub-menu").removeClass('ShowNav', 1000 );
+});
+</script>

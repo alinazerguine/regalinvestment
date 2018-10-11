@@ -1,0 +1,58 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 09/09/2017 08:59
+  	*/
+
+@font-face {
+  font-family: "Flaticon2";
+  src: url("../fonts/Flaticon2.eot");
+  src: url("../fonts/Flaticon2.eot?#iefix") format("embedded-opentype"),
+       url("../fonts/Flaticon2.woff") format("woff"),
+       url("../fonts/Flaticon2.ttf") format("truetype"),
+       url("../fonts/Flaticon2.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon2";
+    src: url("./Flaticon2.svg#Flaticon") format("svg");
+  }
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}
+
+.flaticon-user:before { content: "\f100"; }
+.flaticon-avatar:before { content: "\f101"; }
+.flaticon-trophy:before { content: "\f102"; }
+.flaticon-trophy-cup-silhouette:before { content: "\f103"; }
+.flaticon-like:before { content: "\f104"; }
+.flaticon-bar-chart:before { content: "\f105"; }
+.flaticon-setting-gears:before { content: "\f106"; }
+.flaticon-gearwheels-couple:before { content: "\f107"; }
+.flaticon-checked:before { content: "\f108"; }
+.flaticon-tick-inside-circle:before { content: "\f109"; }
+.flaticon-clock:before { content: "\f10a"; }
+.flaticon-calendar:before { content: "\f10b"; }
+.flaticon-hammer:before { content: "\f10c"; }
+.flaticon-light-bulb-on:before { content: "\f10d"; }
+.flaticon-idea:before { content: "\f10e"; }
+.flaticon-barrow-with-construction-materials:before { content: "\f10f"; }
+.flaticon-building:before { content: "\f110"; }
+.flaticon-architect-with-helmet:before { content: "\f111"; }
+.flaticon-tractor:before { content: "\f112"; }
+.flaticon-road-roller-tractor:before { content: "\f113"; }
+.flaticon-carrying-box-silhouette:before { content: "\f114"; }
+.flaticon-transport-of-goods:before { content: "\f115"; }
+.flaticon-skyline:before { content: "\f116"; }
+.flaticon-tools-1:before { content: "\f117"; }
+.flaticon-wrench:before { content: "\f118"; }
+.flaticon-worker:before { content: "\f119"; }
+.flaticon-tools:before { content: "\f11a"; }

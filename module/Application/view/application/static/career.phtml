@@ -1,0 +1,57 @@
+<div class="staticheadBlock">
+    				<div class="staticchildBlock">
+                    	<div class="container">
+                        	<div class="row">
+        							<div class="staticTextBlock">
+    						Careers<sub><b class="staticsubTextBlock">&nbsp;join and do best your...</b></sub>
+       					 </div>	
+                         	</div>
+       				 	</div>
+                     </div>
+    
+   				 </div>
+<div class="contentBlock securityBox">
+<div class="container">
+<div class="makediv" style="margin-top:50px;">
+		<div style="margin-bottom:30px">
+			<h1 class="text-center">Current Job Openings</h1>
+		</div>
+        
+	Lorem Ipsum is simply dummy text of the printing and typesetting industry.It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.Lorem Ipsum is simply dummy text of the printing and typesetting industry.It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+    <div class="clearfix">&nbsp;</div> 
+    <div class="clearfix">&nbsp;</div> 
+  </div>
+
+</div>
+</div>
+<div class="container">
+        
+				<?php 
+				
+				 if(count($this->paginator)>0) { 
+				 	foreach($this->paginator as $jobKey=>$jobValue){?>
+					 	<div class="makediv" style="margin-bottom:40px;">
+                        		<div style="font-size:18px;font-weight:bold;margin-bottom:15px;">
+                                	<a href="<?php echo APPLICATION_URL?>/jobdetail/<?php echo myurl_encode($jobValue["job_id"])?>"><?php echo $jobValue["job_title"]?></a>
+                                </div>
+                                <div class="bottom_border"></div>
+                        </div>
+					 
+					 <? }
+					 ?>
+				 <?php echo $this->paginationControl($this->paginator, 'Sliding','auth-acl/paginator.phtml', array('page'=>$this->page));?>
+				 <? }else{?>
+					 <div class="text-center" style="min-height:250px;">
+                            
+                            <br />
+                            <br />
+            					<i class="fa fa-briefcase nobrief"></i>
+               					 <br />
+               				<span class="nojobtext"><b> No Job found</b></span>
+                           </div>
+					<? }
+				
+				?>
+			
+
+		</div>

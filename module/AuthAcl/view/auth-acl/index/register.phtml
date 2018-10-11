@@ -1,0 +1,175 @@
+
+<div class="registration-box-bg" style="margin-top:60px;">
+<div class="text-center"><h1>Sign Up</h1></div>
+	<div class="container" style="margin-top:60px;">
+    	<div class="signupbox" style="min-height:580px">
+			<div id="rootwizard">
+            <form action="" method="post" enctype="multipart/form-data" id="registrationForm">
+				<div class="navbar ">
+                  <div class="navbar-inner">
+                    <div class="container">	
+                        <ul>
+                            <li><a href="#tab1" data-toggle="tab">First</a></li>
+                            <li><a href="#tab2" data-toggle="tab">Second</a></li>
+                            <li><a href="#tab3" data-toggle="tab">Third</a></li>
+                            <li><a href="#tab4" data-toggle="tab">Forth</a></li>
+                           
+                        </ul>
+	 				</div>
+	 			 </div>
+				</div>
+                <div id="bar" class="progress">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+                </div>
+				<div class="tab-content">
+                		<div class="makediv leftelement hide">
+                        		
+                				<i class="fa fa-chevron-left cursor" aria-hidden="true" style="font-size:20px;" onclick="$('.previousa').click()"></i>
+                        </div>
+                        <div class="tab-pane" id="tab1">
+                        		
+                          		<div class="text-left makediv regcontainer">
+                                	<div class="makediv">
+                                    <div><h1 class="margtop0">What's your primary reason for investing?</h1></div>
+                                    <div class="book_type_element">
+                                    	<?php echo $this->formElement($form->get('book_type'))?>
+                                    </div>
+                                    </div>
+                                    <div class="makediv hide" id="investing_reason_block">
+                                    <div><h1>When purchase is expected to be made?</h1></div>
+                                    <div class="book_type_element">
+                                    	<?php echo $this->formElement($form->get('investing_reason'))?>
+                                    </div>
+                                    </div>
+                                    
+                                    <div id="Highcharts_container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto" class="hide"></div>
+                                </div>
+                        </div>
+	    <div class="tab-pane" id="tab2">
+	      				<div class="text-left makediv regcontainer">
+            				<div class="makediv">
+                                    <div><h1>Are you currently investing?</h1></div>
+                                    <div class="book_type_element">
+                                    	<?php echo $this->formElement($form->get('invest_opt'))?>
+                                    </div>
+                           </div>
+                           <div class="makediv hide" id="invest_type_block">
+                                    <div><h1>How are you investing?</h1></div>
+                                    <div class="book_type_element">
+                                    	<?php echo $this->formElement($form->get('invest_type'))?>
+                                    </div>
+                           </div>
+          			</div>
+	    </div>
+		<div class="tab-pane" id="tab3">
+			<div class="text-left makediv regcontainer">
+            				<div class="makediv">
+                                    <div><h1>What are you investable assets?(<?php echo PRICE_SYMBOL?>)</h1></div>
+                                    <div class="book_type_element form-group">
+                                    	<?php echo $this->formElement($form->get('invest_assets'));?>
+                                        <?php echo $this->formElement($form->get("user_inv_return"));?>
+                                    </div>
+                                    <div class="makediv hide" id="recommended_plan">
+                                   		<div class="service_text_box" style="margin-top:10px;margin-bottom:10px;">
+                                            <div class="service_text">
+                                                Our Recommended Plan for you would be <span id="recommended_plan_title" style="color:#283742;"></span>
+                                            </div>
+          								  </div>
+                                        
+                                         
+                                    </div>
+                                    
+                                    <div class="makediv hide" id="invesment_return">
+                                   		<div class="service_text_box" style="margin-top:10px;margin-bottom:10px;">
+                                            <div class="service_text">
+                                                The Projected Returns on Investment after <span id="master_year_block"></span> would be <span id="invesment_return_amount" style="color:#283742;"></span>
+                                            </div>
+                                            <div id="risk_text" class="service_text"></div>
+          								  </div>
+                                        <div id="assets_container" style="min-width: 310px; height: 400px; margin: 0 auto" class="hide"></div>
+                                         
+                                    </div>
+                                    
+                                    
+                           </div>
+                           
+          			</div>
+	    </div>
+		<div class="tab-pane" id="tab4">
+			<div class="text-left makediv regcontainer">
+                        	<div class="col-md-6">
+                            	<div class="form-group">
+                                	<label for="user_first_name">First Name</label>
+                            		<?php echo $this->formElement($form->get('user_first_name'))?>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                	<label for="user_last_name">Last Name</label>
+                            		<?php echo $this->formElement($form->get('user_last_name'))?>
+                                </div>
+                             </div>
+                             <div class="clearfix"></div>
+                             <div class="col-md-12">
+                                <div class="form-group">
+                                	<label for="user_email">Email Address</label>
+                            		<?php echo $this->formElement($form->get('user_email'))?>
+                                </div>
+                                <div class="form-group" id="showpassword">
+                                	<label for="user_password">Password</label>
+                            		<?php echo $this->formElement($form->get('user_password'))?>
+                            	</div>
+                                <div class="form-group">
+                                	<label for="user_rpassword">Confirm Password</label>
+                            		<?php echo $this->formElement($form->get('user_rpassword'))?>
+                            	</div>
+                                <div class="form-group">
+                                	<label for="user_location">Location</label>
+                            		<?php echo $this->formElement($form->get('user_location'))?>
+                                    <?php echo $this->formElement($form->get('user_loc_latitude'))?>
+                                    <?php echo $this->formElement($form->get('user_loc_longitude'))?>
+                                </div>
+                                
+                                 <div class="form-group" style="margin-top:15px;">
+                                	<label for="user_emp_status">Employment Status</label>
+                            		<?php echo $this->formElement($form->get('user_emp_status'))?>
+                                </div>
+                                 <div class="form-group">
+                                	<label for="user_annual_income">Annual Income(<?php echo PRICE_SYMBOL?>)</label>
+                            		<?php echo $this->formElement($form->get('user_annual_income'))?>
+                                </div>
+                                
+                            	<div class="form-group text-left">
+                                	<button class="btn SiteButton" type="submit">Submit</button>
+                            	</div>
+                                <?php /*?><div class="form-group text-right">
+                                    <a href="<?php echo $this->url('login')?>" class="pull-left redilink">Already a user! Login here</a>
+                                </div><?php */?>
+                                
+                            </div>
+                        </div>
+	    </div>
+		<div class="text-left makediv regcontainer">
+		<ul class="pager wizard text-left">
+			<?php /*?><li class="previous first" style="display:none;"><a href="#">First</a></li><?php */?>
+			<li class="previous" style="display:none;"><a  href="#"class="previousa">Previous</a></li>
+			<?php /*?><li class="next last" style="display:none;"><a href="#">Last</a></li><?php */?>
+		  	<li class="next"><a  class="btn SiteButton" href="#">Continue</a></li>
+		</ul>
+        </div>
+	</div>
+    </form>
+				</div>
+		</div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<?php echo GOOGLE_MAP_API_KEY?>&libraries=places&sensor=false">
+</script>
+<script src="<?php echo SITE_HTTP_URL?>/public/js/highcharts.js"></script>
+<script src="<?php echo SITE_HTTP_URL?>/public/js/jquery.bootstrap.wizard.min.js"></script>
+<script src="<?php echo SITE_HTTP_URL?>/public/js/register.js"></script>
+	<script>
+	
+	
+	</script>

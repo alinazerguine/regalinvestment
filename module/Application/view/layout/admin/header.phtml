@@ -1,0 +1,222 @@
+<?php
+use Zend\Session\Container;
+use Application\Model\AbstractModel;
+
+$AbstractModel = new AbstractModel($this->DB_ADAPTER);
+$GetAllNotifications = $AbstractModel->Super_Get("notifications","notification_user_id='1' and notification_read_status='0'","fetchAll",
+array("order"=>"notification_id DESC"));/*not_date DESC*/
+
+$NotificationCount = count($GetAllNotifications); 
+?>
+<!--Topbar Start Here-->
+<header class="topbar clearfix">
+    <!--Topbar Left Branding With Logo Start-->
+    <div class="topbar-left pull-left">
+        <div class="clearfix">
+            <ul class="left-branding pull-left clickablemenu ttmenu dark-style menu-color-gradient">
+                <li><span class="left-toggle-switch"><i class="zmdi zmdi-menu"></i></span></li>
+                <li>
+                    <div class="logo">
+                        <a href="<?php echo $this->url('dashboard')?>" title="dashboard">
+                        	<img src="<?php echo HTTP_IMG_PATH ?>/logo.png" alt="logo">
+                        </a>
+                    </div>
+                </li>
+            </ul>
+            <!--Mobile Search and Rightbar Toggle-->
+            <ul class="branding-right pull-right">
+                <li><a href="#" class="btn-mobile-bar"><i class="zmdi zmdi-menu"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <!--Topbar Left Branding With Logo End-->
+    <!--Topbar Right Start-->
+    <div class="topbar-right pull-right">
+        <div class="clearfix">
+            <!--Mobile View Leftbar Toggle-->
+            <ul class="left-bar-switch pull-left">
+                <li><span class="left-toggle-switch"><i class="zmdi zmdi-menu"></i></span></li>
+            </ul>
+            <ul class="pull-right top-right-icons">
+                
+                <!-- Notifications -->
+               <li class="dropdown notifications-dropdown">
+                    <a class="btn-notification dropdown-toggle" data-toggle="dropdown" onclick="readnots()" ><span class="noty-bubble"><?php echo $NotificationCount;?></span><i class="zmdi zmdi-globe"></i></a>
+                    <div class="dropdown-menu notifications-tabs">
+                        <div>
+                            <ul class="nav material-tabs nav-tabs" role="tablist">
+                              <?php /*?>  <li class="active"><a href="#message" aria-controls="message" role="tab" data-toggle="tab">Message</a></li><?php */?>
+                                <li class="active"><a href="#notifications" aria-controls="notifications" role="tab" data-toggle="tab">Notifications</a></li>
+                            </ul>
+                            <div class="tab-content">
+                               <?php /*?> <div role="tabpanel" class="tab-pane active" id="message">
+                                    <div class="message-list-container">
+                                        <h4>You have 15 new messages</h4>
+                                        <ul class="clearfix">
+                                            <li class="clearfix">
+                                                <a href="#" class="message-thumb"><img src="images/avatar/robertoortiz.jpg" alt="image">
+                                                </a><a href="#" class="message-intro"><span class="message-meta">Robertoortiz </span>Nunc aliquam dolor... <span class="message-time">today at 10:20 pm</span></a>
+                                            </li>
+                                            <li class="clearfix">
+                                                <a href="#" class="message-thumb"><span class="message-letter w_bg_purple">A</span>
+                                                </a><a href="#" class="message-intro"><span class="message-meta">Allisongrayce </span>In hac habitasse ... <span class="message-time">today at 8:29 pm</span></a>
+                                            </li>
+                                            <li class="clearfix">
+                                                <a href="#" class="message-thumb"><img src="images/avatar/michael-owens.jpg" alt="image">
+                                                </a><a href="#" class="message-intro"><span class="message-meta">Michael </span>Suspendisse ac mauris ... <span class="message-time">yesterday at 12:29 pm</span></a>
+                                            </li>
+                                            <li class="clearfix">
+                                                <a href="#" class="message-thumb"><span class="message-letter w_bg_blue">B</span>
+                                                </a><a href="#" class="message-intro"><span class="message-meta">Bobbyjkane </span>Vivamus lacinia facilisis... <span class="message-time">yesterday at 11:48 pm</span></a>
+                                            </li>
+                                            <li class="clearfix">
+                                                <a href="#" class="message-thumb"><img src="images/avatar/bobbyjkane.jpg" alt="image">
+                                                </a><a href="#" class="message-intro"><span class="message-meta">Bobbyjkane </span>Donec vel iaculis ... <span class="message-time">1 month ago</span></a>
+                                            </li>
+                                            <li class="clearfix">
+                                                <a href="#" class="message-thumb"><span class="message-letter w_bg_teal">C</span>
+                                                </a><a href="#" class="message-intro"><span class="message-meta">Chexee </span> Curabitur eget blandit...<span class="message-time">3 months ago</span></a>
+                                            </li>
+                                            <li class="clearfix">
+                                                <a href="#" class="message-thumb"><img src="images/avatar/coreyweb.jpg" alt="image">
+                                                </a><a href="#" class="message-intro"><span class="message-meta">Coreyweb </span>Etiam molestie nulla... <span class="message-time">1 year ago</span></a>
+                                            </li>
+                                        </ul>
+                                        <a class="btn btn-link btn-block btn-view-all" href="#"><span>View All</span></a>
+                                    </div>
+                                </div><?php */?>
+                                <div role="tabpanel" class="tab-pane active" id="notifications" >
+                                    <div class="notification-wrap" style="height:200px;">
+                                        <?php 
+										if(count($GetAllNotifications)>0)
+										{
+										?>
+                                        <h4>You have <?php echo $NotificationCount;?> new notifications</h4>
+                                        <? }?>
+                                        <ul>
+                                        
+                                        <?php
+								if(count($GetAllNotifications)>0)
+								{
+									foreach($GetAllNotifications as $notification){ 
+									switch($notification['notification_type'])
+									{
+										case 0: // Plan Accepted
+										$joinArr=array(
+									'0'=> array('0'=>'investment_plans','1'=>'user_plan_planid=inv_pl_id','2'=>'Left','3'=>array('inv_pl_title')),
+									'1'=> array('0'=>'users','1'=>'user_plan_userid=user_id','2'=>'Left','3'=>array('user_name','user_image'))
+									
+									);
+										
+										$getplandata=$AbstractModel->Super_Get("users_plan","user_plan_id='".$notification['notification_plan_id']."'","fetch",array(),$joinArr);$NText = $getplandata['inv_pl_title'].' is requesteded by '.$getplandata['user_name'];
+										$NImage=$getplandata['user_image'];
+										$NType = 'Plan Requested';
+										$NLink = APPLICATION_URL.'/'.BACKEND.'/planrequest/'.$notification['notification_by_user_id'];
+										break;
+										
+										case 4: // Plan Accepted
+										$joinArr=array(
+									'0'=> array('0'=>'users','1'=>'consult_user_id=user_id','2'=>'Left','3'=>array('user_name','user_image'))
+									);
+										
+										$getNotifyData=$AbstractModel->Super_Get("consulting_send_request","consult_id='".$notification['notification_consult_id']."'","fetch",array(),$joinArr);
+										
+										//prd($getNotifyData);
+										$NText = $getNotifyData['user_name'].' has send consulting request';
+										$NImage=$getNotifyData['user_image'];
+										$NType = 'Consult Request';
+										$NLink = APPLICATION_URL.'/'.BACKEND.'/view-consulting-request/'.$notification['notification_consult_id'];
+										break;
+										/*0=plan added by user,1=>plan approved by admin,2=>plan rejected by admin,'3'=>balance is added by admin,4=>user send consulting request to admin,5=>desposit amount request by user,6=>withdraw amount request by user */
+										case 5:
+							$joinArr=array(
+							'0'=> array('0'=>'users','1'=>'user_trans_userid=user_id','2'=>'Left','3'=>array('user_name',"user_image")));
+							$getNotifyData=$AbstractModel->Super_Get("user_transfer","user_trans_id='".$notification['notification_trans_id']."'","fetch",array(),$joinArr);
+							$NText = $getNotifyData['user_name'].' has send desposit amount request';
+							$NImage=$getNotifyData['user_image'];
+							$NType = 'Deposit';
+							$NLink = APPLICATION_URL.'/'.BACKEND.'/deposit/'.$notification['notification_trans_id'];
+									
+										break;
+										case 6:
+										$joinArr=array(
+							'0'=> array('0'=>'users','1'=>'user_trans_userid=user_id','2'=>'Left','3'=>array('user_name',"user_image")));
+							$getNotifyData=$AbstractModel->Super_Get("user_transfer","user_trans_id='".$notification['notification_trans_id']."'","fetch",array(),$joinArr);
+							$NText = $getNotifyData['user_name'].' has send withdraw amount request';
+							$NImage=$getNotifyData['user_image'];
+							$NType = 'Withdraw';
+							$NLink = APPLICATION_URL.'/'.BACKEND.'/withdrawal/'.$notification['notification_trans_id'];
+										break;
+										
+										
+										case 7:
+										
+							$getNotifyData=$AbstractModel->Super_Get("job_apply","job_app_id='".$notification['notification_job_app_id']."'","fetch",array());			$NText = $getNotifyData['job_app_name'].' applied for job';
+							$NImage="";
+							$NType = 'Job Application';
+							$NLink = APPLICATION_URL.'/'.BACKEND.'/jobapply/'.myurl_encode($getNotifyData['job_app_jobid']).'/'.myurl_encode($getNotifyData['job_app_id']);
+										break;
+										case 10: // Plan Accepted
+										$joinArr=array(
+									'0'=> array('0'=>'resource','1'=>'user_res_resid=res_id','2'=>'Left','3'=>array('res_title')),
+									'1'=> array('0'=>'users','1'=>'user_res_userid=user_id','2'=>'Left','3'=>array('user_name','user_image'))
+									
+									);
+										
+										$getresourcedata=$AbstractModel->Super_Get("users_resource","user_res_id='".$notification['notification_resource_id']."'","fetch",array(),$joinArr);
+										$NText = $getresourcedata['res_title'].' is requesteded by '.$getresourcedata['user_name'];
+										$NImage=$getresourcedata['user_image'];
+										$NType = 'Resource Requested';
+										$NLink = APPLICATION_URL.'/'.BACKEND.'/resourcerequest/'.$notification['notification_by_user_id'];
+										break;
+										
+										
+									}
+									?>
+                                    <li><a href="<?php echo $NLink?>" class="clearfix"><span class="ni" style="width: 20%;
+    margin-right: 5px;"><img src="<?php echo getUserImage($NImage,"60")?>"  class="img-circle"/></span><span class="notification-message"><?php echo $NText?> <span class="notification-time clearfix"><?php echo showPostTime($notification['notification_date']);?> ago</span></span></a></li>
+    
+                                    <? } }else{?>
+										<li class="text-center">No notifications</li>
+									<? }
+								?>
+                                            
+                                            
+                                          <?php /*?>  <li><a href="#" class="clearfix"><span class="ni w_bg_orange"><i class="fa fa-life-ring"></i></span><span class="notification-message">Nulla commodo sem at purus. <span class="notification-time clearfix">1 Hours Ago</span></span></a>
+                                            </li>
+                                            <li><a href="#" class="clearfix"><span class="ni w_bg_red"><i class="fa fa-star-o"></i></span><span class="notification-message">Fusce condimentum turpis. <span class="notification-time clearfix">3 Hours Ago</span></span></a>
+                                            </li>
+                                            <li><a href="#" class="clearfix"><span class="ni w_bg_light_blue"><i class="fa fa-trophy"></i></span><span class="notification-message">Pellentesque habitant morbi. <span class="notification-time clearfix">Yesterday</span></span></a>
+                                            </li>
+                                            <li><a href="#" class="clearfix"><span class="ni w_bg_cyan"><i class="fa fa-bolt"></i></span><span class="notification-message">Fusce bibendum lacus mauris.<span class="notification-time clearfix">1 Month Ago</span></span></a>
+                                            </li>
+                                            <li><a href="#" class="clearfix"><span class="ni w_bg_yellow"><i class="fa fa-bookmark-o"></i></span><span class="notification-message">Donec id mi placerat, scelerisque.<span class="notification-time clearfix">3 Months Ago</span></span></a>
+                                            </li><?php */?>
+                                        </ul>
+                                       <?php /*?> <a class="btn btn-link btn-block btn-view-all clearfix" href="#"><span>View All</span></a><?php */?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                
+                
+                
+            </ul>
+        </div>
+    </div>
+    <!--Topbar Right End-->
+</header>
+<!--Topbar End Here-->
+<script>
+function readnots()
+		{
+			$.ajax({
+				url: baseUrl+'/readnotify',
+				success: function(data){
+					$('.noty-bubble').html('0');
+				},
+			});
+		}
+</script>

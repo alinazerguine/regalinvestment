@@ -1,0 +1,92 @@
+<div class="staticpage" id="team">
+    <div class="staticpage-bg">
+        <div class="container text-center">
+            <h2 class="staticpage-header">Team Members</h2>
+        </div>
+    </div>
+    <div class="staticpage-content">
+    	<div class="home-business-info-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                    	<br />
+                        <h2>Our Talented Team Members</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    	<div class="team-member-pagewrap">
+    		<div class="container">
+            	<div class="row">
+                	<?php
+					foreach($this->teamData as $teamData){
+					?>
+					<div class="col-md-3">
+                    	<div class="team-member-block">
+                        	<div class="team-member-imgblock">
+                            	<?php 
+								if($teamData['team_member_image']!=""){
+								?>
+                            	<img class="" src="<?php echo HTTP_TEAM_IMAGES_PATH.'/'.$teamData['team_member_image'] ?>" />
+                                <?
+								}
+								else{
+								?>
+								<img class="" src="<?php echo HTTP_IMG_PATH.'/team-member-default.jpg' ?>" />
+								<?	
+								}
+								?>
+                                <div class="overlay-social contact-social-block">
+                                	<?php
+                                    if($teamData['team_member_social_fb']!=""){
+									?>
+                                    <a href="<?php echo $teamData['team_member_social_fb'] ?>">
+                                    	<i class="fa fa-facebook"></i>
+                                    </a>
+									<?
+									}
+									if($teamData['team_member_social_twitter']!=""){
+									?>
+                                    <a href="<?php echo $teamData['team_member_social_twitter'] ?>">
+                                    	<i class="fa fa-twitter"></i>
+                                    </a>
+									<?
+									}
+									if($teamData['team_member_social_linkedin']!=""){
+									?>
+                                    <a href="<?php echo $teamData['team_member_social_linkedin'] ?>">
+                                    	<i class="fa fa-linkedin"></i>
+                                    </a>
+									<?
+									}
+									if($teamData['team_member_social_instagram']!=""){
+									?>
+                                    <a href="<?php echo $teamData['team_member_social_instagram'] ?>">
+                                    	<i class="fa fa-instagram"></i>
+                                    </a>
+									<?
+									}
+									?>
+                                </div>
+                        	</div>
+                        	<div class="team-name"><?php echo $teamData['team_member_name'] ?></div>
+                        	<div class="team-pos"><?php echo $teamData['team_member_position'] ?></div>
+                        	<!--<div class="team-socialbox"><?php echo $teamData['team_member_social_fb'] ?></div>-->
+                        </div>
+                    </div>
+					<?	
+					}
+					?>
+                </div>
+            </div>
+    	</div>
+    </div>
+</div>
+
+<script>
+$(".team-member-imgblock").on("mouseover",function(){
+	$(this).find(".overlay-social").css("z-index","1");
+}).on("mouseleave",function(){
+	$(this).find(".overlay-social").css("z-index","-1");
+})
+</script>

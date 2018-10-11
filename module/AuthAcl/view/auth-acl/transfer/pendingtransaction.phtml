@@ -1,0 +1,101 @@
+
+<div id="grad" class="animated fadeIn element_block">
+<div class="makediv relative">
+<?php echo $this->render("auth-acl/profile/_profile_side_bar.phtml"); ?>
+
+
+	<div class="main-content container" >
+
+		<div class="menu" style="margin-top:50px;">
+        		<div class="ProfileConDiv">
+                    <div class="panel-body" align="left">
+                    <ul class="nav nav-tabs">
+                         <li><a href="<?=SITE_HTTP_URL?>/portfolio">Transaction</a></li>
+                         <li class="active"><a href="#pending-account" class="navLiactive">Pending</a></li>
+                </ul>
+                    <div class="tab-content">
+                    
+        
+      
+            
+            
+           
+                    <div id="pending-account" class="tab-pane fade  in active">
+                    <?php 
+                     if(count($this->paginator)>0) {
+                         global $currencyCode,$methodBox;
+                        
+                     ?>
+                      <div class="table-responsive"> 
+                                
+                                <br />
+                                <br />
+                       <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                
+                                <th>Type</th>
+                                <th>Balance</th>
+                                <th>Added On</th>
+                            </tr>
+                        </thead>
+                      
+                      <tbody>
+                        
+                        <? foreach($this->paginator as $portKey=>$portValue){
+                            ?>
+                           <tr>
+                             <td><?php echo $portValue['user_trans_type']=='0'?"Deposit":"Withdraw";?></td>
+                             <td>
+                                <?php
+                                    $user_amount=$portValue["user_trans_currency"]!=''?$currencyCode[$portValue["user_trans_currency"]].removedecimal($portValue["user_trans_amount"]):"USD".removedecimal($portValue["user_trans_amount"]);
+                                    
+                                    $txn_method=$portValue['user_trans_method']!=''?'&nbsp;(By '.$methodBox[$portValue['user_trans_method']].')':"";
+                                    echo $user_amount.$txn_method;
+                                    
+                                    
+                                    
+                                ?>
+                             </td> 
+                             <td><?php echo getDateformaton($portValue["user_trans_date"]);?></td>
+                             </tr>
+                         <? }
+                         ?>
+                        
+                         
+                          </tbody>
+                        </table>
+                        </div>
+                     <?php echo $this->paginationControl($this->paginator, 'Sliding','auth-acl/paginator.phtml', array('page'=>$this->page));?>
+                     <? }else{?>
+                         <div class="text-center" style="min-height:300px;margin-top: 50px;">
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                    <i class="fa fa-briefcase nobrief"></i>
+                                     <br />
+                                <span class="nojobtext"> No Transaction found</span>
+                                <br />
+                                <br />
+                            
+                                <br />
+                                <br />
+                             </div>
+                        <? }
+                    
+                    ?>
+                    </div>
+                    
+                    
+                 </div>
+                    </div>
+                    
+                </div>
+                <p class="clearfix">&nbsp;</p>
+		</div>
+
+	</div>
+    </div>
+   </div>
+

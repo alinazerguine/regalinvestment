@@ -1,0 +1,105 @@
+<?php 
+	$body_class='leftbar-view';
+	$controller = @$this->getHelperPluginManager()->getServiceLocator()->get('application')->getMvcEvent()->getRouteMatch()->getParam('controller');
+	$current_action = @$this->getHelperPluginManager()->getServiceLocator()->get('application')->getMvcEvent()->getRouteMatch()->getParam('action');
+	$explode_controller = explode('\\', $controller);	
+	$current_module = @$explode_controller[0];
+	$current_controller = @array_pop(explode('\\', $controller));		
+	if($current_controller=='IndexController' && ($current_action=='login' || $current_action=='forgotpassword' || $current_action=='resetpassword'))
+	{$body_class='login-page';}
+?>
+<!doctype html>
+<html><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title><?php echo SITE_NAME;?> Admin</title>
+    
+    <!--All CSS Files included-->
+    <?php echo $this->render('include_css.phtml');?> 
+    
+    <script type="text/javascript" src="<?=PLUGIN_PATH?>/jquery-1.11.0.min.js"></script>
+    <script>
+        var baseUrl = '<?php echo APPLICATION_URL.'/'.BACKEND?>';
+        var moduleName = '<?php echo strtolower($current_module)?>'; 
+        var controllerName = '<?php echo strtolower($current_controller)?>';
+        var actionName = '<?php echo strtolower($current_action)?>';
+        var front_css_path = '<?php echo FRONT_CSS?>';	
+		var SITE_HTTP_URL = '<?php echo SITE_HTTP_URL?>';
+		var PRICE_SYMBOL = '<?php echo PRICE_SYMBOL?>';
+    </script>
+</head>
+
+<body class="<?php echo $body_class?>">
+	<?php echo $this->GetMessages();?>
+    
+    <?php if($current_controller=='IndexController' && ($current_action=='login' || $current_action=='forgotpassword' || $current_action=='resetpassword')){?>
+    <!--Page Container Start Here--> 
+    <?php //echo $this->content ;?> 
+    <?php echo $this->render('login.phtml');?>
+    <!--Page Container End Here-->
+    <?php
+	}
+	else{
+		?>
+		<!--Topbar Start Here--> 
+		<?php echo $this->render('header.phtml');?> 
+		<!--Topbar End Here--> 
+		<!--Leftbar Start Here--> 
+		<?php echo $this->render('navigation.phtml');?> 
+		<!--Leftbar End Here--> 
+		
+		<!--Page Container Start Here-->
+        <section class="main-container">
+        	<div class="container-fluid">
+				<?php 
+            	if(isset($_SERVER['HTTP_REFERER'])){
+            		?>
+            		<!--<div class="clearfix" style="margin-bottom:20px; clear:both; overflow:hidden;">
+                    	<button type="button" class="btn btn-success pull-right AdminBackBtn" onClick="window.location='<?php echo $_SERVER['HTTP_REFERER']?>'">
+                    		<i class="fa fa-angle-double-left"></i>&nbsp;Back
+            			</button>
+            		</div>-->
+            		<?
+            	}
+            	?>
+        		<div class="Clear bodycontainer" style="min-height:547px;">
+				  
+				<?php echo $this->content ;?> 
+                
+                </div>
+        	</div>
+        	
+        	<!--Footer Start Here --> 
+        	<?php echo $this->render('footer.phtml');?>
+        	<!--Footer End Here --> 
+        </section>
+		<!--Page Container End Here-->
+		<?php
+	}
+	?>
+    
+    <!--All JS Files included-->
+    <?php echo $this->render('include_js.phtml');?> 
+    
+    <script type="text/javascript">
+    jQuery(document).ready(function()
+    {    
+        if(controllerName=='staticcontroller' && (actionName=='addpages' || actionName=='editpages'  || actionName=='edithomecontent'  || actionName=='addhomecontent'))
+        {
+            if(actionName=='addpages' || actionName=='editpages'){	
+                CKEDITOR.replace('page_content');            
+            }
+            if(actionName=='addhomecontent' || actionName=='edithomecontent'){
+                CKEDITOR.replace('block_content');            
+            }
+            CKEDITOR.add
+                CKEDITOR.config.contentsCss = [ front_css_path+'/bootstrap.min.css', front_css_path+'/style.css' ];
+        }
+		
+		
+    });
+    </script>
+    
+</body>
+</html>

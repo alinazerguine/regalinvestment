@@ -1,0 +1,13 @@
+<div class="card card-user">
+  <div class="content text-center">
+    <div class="author"> <a href="<?php echo $this->url('adminimage',array('action'=>'image'))?>"> <img class="img-responsive" src="<?php echo getUserImage($adminData['user_image'],'60')?>" alt="..."/>
+      <h4 class="title"><?php echo $adminData['user_first_name'].' '.$adminData['user_last_name']?><br />
+        <small><?php echo $adminData['user_email']?></small> </h4>
+      </a> </div>
+    <div class="clearfix h20">&nbsp;</div>
+    <a href="<?php echo $this->url('adminimage',array('action'=>'image'))?>">
+    <button type="button" class="btn btn-success btn-fill">Change Picture</button>
+    </a> 
+  </div>
+</div>
+ 

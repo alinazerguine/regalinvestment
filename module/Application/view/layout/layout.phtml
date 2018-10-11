@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+<?php
+use Zend\Session\Container;
+use Application\Model\AbstractModel;
+
+$controller = @$this->getHelperPluginManager()->getServiceLocator()->get('application')->getMvcEvent()->getRouteMatch()->getParam('controller');
+$current_action = @$this->getHelperPluginManager()->getServiceLocator()->get('application')->getMvcEvent()->getRouteMatch()->getParam('action');
+$controller1= $controller;
+
+$controller1 = explode('\\', $controller1);
+$current_module = $controller1[0];
+$current_controller = @array_pop(explode('\\', $controller));	
+
+$userId ='';$userType='';
+if(isset($this->loggedUser) && !empty($this->loggedUser)){
+	$userId = $this->loggedUser->user_id;
+	$userType = $this->loggedUser->user_type;
+}
+if(isset($this->loggedUser) && !empty($this->loggedUser)){
+	$userId = $this->loggedUser->user_id;
+	$userType = $this->loggedUser->user_type;
+}
+$AbstractModel=new AbstractModel($this->DB_ADAPTER);
+?>
+<?php 
+$seperator="";
+if($this->pageHeading!=""){
+	$seperator = " | ";
+}
+?>
+<?php echo $this->headTitle($this->SITE_CONFIG['site_name'].$seperator.$this->pageHeading)->setSeparator(' - ')->setAutoEscape(false) ?>
+<?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0')->appendName('description', $this->SITE_CONFIG['meta_description'])->appendName('keywords', $this->SITE_CONFIG['meta_keyword'])->appendHttpEquiv('X-UA-Compatible', 'IE=edge')?>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+<?php echo $this->render('include_css.phtml');?> 
+<script type="text/javascript">
+var baseUrl = SITEURL = SITE_URL = '<?php echo APPLICATION_URL?>';
+var moduleName='<?php echo strtolower($current_module)?>';
+
+var controllerName='<?php echo strtolower($current_controller)?>';
+var actionName='<?php echo strtolower($current_action)?>';
+
+var userId=userType='';
+var priceSymbol = '<?=PRICE_SYMBOL?>';
+var PRICE_SYMBOL = '<?=PRICE_SYMBOL?>';
+var SITE_HTTP_URL = '<?=SITE_HTTP_URL?>';
+var RECORD_PER_PAGE = '<?=RECORD_PER_PAGE?>';
+var HTTP_PROFILE_IMAGES_PATH = '<?php echo HTTP_PROFILE_IMAGES_PATH?>';
+var pageId='';
+
+</script>
+<script type="text/javascript" src="<?=PLUGIN_PATH?>/jquery-1.11.0.min.js"></script>
+</head>
+
+<body <?php echo $current_controller=="IndexController" && $current_action=="index"?'class="homepage"':"" ?>>
+
+
+
+<?php 
+if(!($current_controller=="IndexController" && $current_action=="login")){
+echo $this->render('header.phtml');
+}
+echo $this->GetMessages();
+echo $this->content;
+if(!($current_controller=="IndexController" && $current_action=="login")){
+echo $this->render('footer.phtml');
+}
+
+echo $this->headScript();
+?>
+
+
+
+<!-- BLANK MODAL START -->
+<div class="modal fade NewModalDiv" id="blankViewModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        
+        <div class="modal-content Clear">
+        	<div class="modal-header">
+            	<div><img src="<?=HTTP_IMG_PATH?>/close_button.png" alt="<?=HTTP_IMG_PATH?>/close_button.png" class="pull-right Cursor" width="24" height="24" data-dismiss="modal" /></div>
+                <div class="DisplayTable">
+                	<div class="DisplayTableCell">&nbsp;</div>
+                </div>
+                <div><hr class="Clear"></div>&nbsp;
+            </div>
+            <div class="modal-body">&nbsp;</div>
+        </div>
+    </div>
+</div>
+<!-- BLANK MODAL END -->
+
+<script>
+$(window).load(function(){
+	$(".preloader").fadeOut("slow");
+})
+</script>
+
+</body>
+</html>

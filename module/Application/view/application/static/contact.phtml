@@ -1,0 +1,156 @@
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<div class="staticpage" id="contactus">
+	<?php /*?><div class="staticheadBlock">
+    				<div class="staticchildBlock">
+                    	<div class="container">
+                        	<div class="row">
+        							<div class="staticTextBlock">
+    						Contact Us<sub><b class="staticsubTextBlock">&nbsp;We are ready to help you <span class="fa fa-smile-o"></span>...</b></sub>
+       					 </div>	
+                         	</div>
+       				 	</div>
+                     </div>
+    
+   				 </div><?php */?>
+	<?php echo $this->page_content['page_content']?>
+	
+	
+	<div class="contact-content-wrapper">
+        <div class="container">
+            <div class="row">
+            	<div class="col-md-4 mapcontainer">
+                	<div class="">
+                	<?php echo $this->render("application/static/sub_full_map.phtml");?>
+                    </div>
+                </div>
+                <div class="col-md-8 formcontainer">
+                	<div class="makediv form_block" >
+                	 <div class="col-md-8" >
+                	<div class="form-box" >
+                    	<?php /*?><?php echo $this->renderForm($this->form); ?><?php */?>
+                        
+						<?php echo $this->form()->openTag($this->form);?>
+                        <div class="form-group">
+                            <label class="form-label" for="user_name">Name</label>
+                            <?php echo $this->formElement($this->form->get('user_name'));?>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="user_name">Email Address</label>
+                            <?php echo $this->formElement($this->form->get('user_email'));?>
+                        </div>
+                        <div class="form-group">
+                        	<label class="form-label" for="user_name">Phone Number</label>
+                        	<?php echo $this->formElement($this->form->get('user_phone'));?>
+                        </div>
+                        <div class="form-group">
+                        	<label class="form-label" for="user_name">Your Message</label>
+                        	<?php echo $this->formElement($this->form->get('user_message'));?>
+                        </div>
+                        <div id="recaptcha-wrapper">
+                        
+                        <div class="g-recaptcha" data-callback="correctCaptcha" data-sitekey="6LcmLDcUAAAAADF5TbOeIgpoM3_Ff_2uOgyH1to7"></div>
+                        <div class="form-group">
+      <?php echo $this->formElement($this->form->get('hiddenRecaptcha'));?>
+   		</div>   
+              
+                        </div>
+                <div style="margin-top:20px; " class="text-center">
+                        	<?php echo $this->formElement($this->form->get('bttnsubmit')); ?>
+                        </div>
+                        <?php echo $this->form()->closeTag($this->form); ?>
+                    </div>
+                    </div>
+                     <div class="col-md-4" >
+                    <div class="row infoBlock">
+                	<div class="row contact-information-box">
+                    	<div class="contact-info-heading-main">
+                        
+                            	<div><img src="<?php echo HTTP_IMG_PATH?>/regal_y.png" /></div>
+                            	<div>24* 7 </div>
+                               <div> Support</div>
+                        
+                        <div style="border-top:1px solid #fcd116;padding-top:20px;padding-bottom:20px;margin-top:10px;">
+                        <div class="contact-info-address">
+                        	<h4>Address</h4>
+                            <p><?php echo $this->SITE_CONFIG['site_address'] ?></p>
+                        </div>
+                        <div class="contact-info-telephone">
+                        	<h4>Phone number</h4>
+                        	<p><?php echo $this->SITE_CONFIG['site_phone'] ?></p>
+                        </div>
+                        <div class="contact-info-telephone">
+                        	<h4>Email Address</h4>
+                        	<p><?php echo $this->SITE_CONFIG['contact_mail_address'] ?></p>
+                        </div>
+                        </div>
+                        <div class="social_icons" style="border-top:1px solid #fcd116;padding-top:20px;padding-bottom:20px;">
+            
+            	<div class="social_icons_tw">
+                	<a target="_blank" href="<?=$this->SITE_CONFIG['twitter_link']?>"><span class="fa fa-twitter"></span></a>
+                </div>
+                
+                <div class="social_icons_gplus">
+                	<a target="_blank" href="<?=$this->SITE_CONFIG['gplus_link']?>"><i class="fa fa-google-plus fa-fw"></i></a>
+                </div>
+                
+                <div class="social_icons_fb">
+                	<a target="_blank" href="<?=$this->SITE_CONFIG['facebook_link']?>"><span class="fa fa-facebook"></span></a>
+                </div>
+                
+                <div class="social_icons_in">
+                	<a target="_blank" href="<?=$this->SITE_CONFIG['linkedin_link']?>"><span class="fa fa-linkedin"></span></a>
+                </div>
+            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                
+            </div>
+        </div>
+        
+       
+        
+        <div class="clearfix"></div>
+    </div>
+    
+</div>
+<script>
+var correctCaptcha = function(response) {
+	 if (response.length == 0) {}
+	 else {$('#hiddenRecaptcha').removeClass('required');
+	 $('span[for="hiddenRecaptcha"]').remove();
+	 }
+};
+$(function(){
+    // global variables
+    captchaResized = false;
+    captchaWidth = 304;
+    captchaHeight = 78;
+    captchaWrapper = $('#recaptcha-wrapper');
+    captchaElements = $('#rc-imageselect, .g-recaptcha');
+
+    resizeCaptcha();
+    $(window).on('resize', function() {
+        resizeCaptcha();
+    });
+});
+
+function resizeCaptcha() {
+    if (captchaWrapper.width() >= captchaWidth) {
+        if (captchaResized) {
+            captchaElements.css('transform', '').css('-webkit-transform', '').css('-ms-transform', '').css('-o-transform', '').css('transform-origin', '').css('-webkit-transform-origin', '').css('-ms-transform-origin', '').css('-o-transform-origin', '');
+            captchaWrapper.height(captchaHeight);
+            captchaResized = false;
+        }
+    } else {
+        var scale = (1 - (captchaWidth - captchaWrapper.width()) * (0.05/15));
+        captchaElements.css('transform', 'scale('+scale+')').css('-webkit-transform', 'scale('+scale+')').css('-ms-transform', 'scale('+scale+')').css('-o-transform', 'scale('+scale+')').css('transform-origin', '0 0').css('-webkit-transform-origin', '0 0').css('-ms-transform-origin', '0 0').css('-o-transform-origin', '0 0');
+        captchaWrapper.height(captchaHeight * scale);
+        if (captchaResized == false) captchaResized = true;
+    }
+}
+</script>

@@ -1,0 +1,186 @@
+
+
+<?php
+
+if($this->page_content['page_id']==3){
+?>
+<div class="staticpage" id="aboutus">
+	<div class="staticpage-bg">
+        <div class="container text-center">
+            <h2 class="staticpage-header">About Us</h2>
+        </div>
+    </div>
+    <?php echo $this->page_content['page_content']; ?>
+    
+    <!-- Contact Box -->
+	<div class="home-registration-block">
+        <div class="registration-block" style="background-image:url(<?php echo HTTP_IMG_PATH?>/5.jpg);background-size:cover;background-position:center top;width:100%;background-attachment:fixed;padding-top: 6.5%;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="content-icon-wrape">
+                        	<div class="circled-icon"><i class="fa fa-map-marker"></i></div>
+                        	<div class="circled-desc"><?php echo $this->site_config['site_address'] ?></div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4">
+                        <div class="content-icon-wrape">
+                        	<div class="circled-icon"><i class="fa fa-mobile"></i></div>
+                        	<div class="circled-desc"><?php echo $this->site_config['site_phone'] ?></div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4">
+                        <div class="content-icon-wrape">
+                        	<div class="circled-icon"><i class="fa fa-envelope"></i></div>
+                        	<div class="circled-desc"><?php echo $this->site_config['contact_mail_address'] ?></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix" style="height:0;clear:both">&nbsp;</div>    
+</div>
+<?
+}
+else if($this->page_content['page_id']==9){
+?>
+<div class="staticpage" id="ourservices">
+	<div class="staticpage-bg">
+        <div class="container text-center">
+            <h2 class="staticpage-header">Our Services</h2>
+        </div>
+    </div>
+    <?php echo $this->page_content['page_content']; ?>
+</div>
+<?
+}
+else{
+?>
+
+				<?php 
+                if($this->page_content['page_id']==7 || $this->page_content['page_id']==8){
+                ?>
+               
+                <div class="staticheadBlock">
+    				<div class="staticchildBlock">
+        				<div class="staticTextBlock">
+    						Terms & Policies<sub><b class="staticsubTextBlock">&nbsp;Last Updated On: &nbsp; <?php echo date("d F, Y ",strtotime($this->page_content['page_updated'])) ?>...</b></sub>
+       					 </div>
+       				 </div>
+    
+   				 </div>
+                
+                <?
+                }
+                else{
+                ?>
+                
+                <?
+                }
+                ?>
+                <div class="container-fluid padding0" style="clear:both; margin-bottom:41px;">
+	<div class="container padding0 faq_margn">
+    	<div class="faq_wrapper" style="margin-bottom:30px;">
+        	<div class="col-md-12 faq_ques">
+            
+            	<h3 style="color:#283742;line-height: 1.8;font-size: 16px;font-weight:bold;margin-bottom:0;">Objective and Scope of Policy?</h3>
+            </div>
+            <div class="col-md-12 faq_ans" style="color:#283742;line-height: 1.8;font-size: 16px;font-weight:300;">
+            	<p style="margin:0;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. printer took a galley of type and scrambled it to make a type specimen book.It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', .</p>
+            </div>
+            <div style="width:30%;border: solid 1px #fcd116;margin:0 auto;margin-top: 30px;"></div>
+        </div>
+        
+        <div class="faq_wrapper" style="margin-bottom:30px;">
+        	<div class="col-md-12 faq_ques">
+            
+            	<h3 style="color:#283742;line-height: 1.8;font-size: 16px;font-weight:bold;margin-bottom:0;">Our Policy?</h3>
+            </div>
+            <div class="col-md-12 faq_ans" style="color:#283742;line-height: 1.8;font-size: 16px;font-weight:300;">
+            	<p style="margin:0;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. printer took a galley of type and scrambled it to make a type specimen book.It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', .</p>
+            </div>
+            <div style="width:30%;border: solid 1px #fcd116;margin:0 auto;margin-top: 30px;"></div>
+        </div>
+        <div class="faq_wrapper" style="margin-bottom:30px;">
+        	<div class="col-md-12 faq_ques">
+            
+            	<h3 style="color:#283742;line-height: 1.8;font-size: 16px;font-weight:bold;margin-bottom:0;">Collection of Information</h3>
+            </div>
+            <div class="col-md-12 faq_ans" style="color:#283742;line-height: 1.8;font-size: 16px;font-weight:300;">
+            	<p style="margin:0;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. printer took a galley of type and scrambled it to make a type specimen book.It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', .</p>
+            </div>
+            <div style="width:30%;border: solid 1px #fcd116;margin:0 auto;margin-top: 30px;"></div>
+        </div>
+        <div class="faq_wrapper" style="margin-bottom:30px;">
+        	<div class="col-md-12 faq_ques">
+            
+            	<h3 style="color:#283742;line-height: 1.8;font-size: 16px;font-weight:bold;margin-bottom:0;">Our Commitment</h3>
+            </div>
+            <div class="col-md-12 faq_ans" style="color:#283742;line-height: 1.8;font-size: 16px;font-weight:300;">
+            	<p style="margin:0;">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. printer took a galley of type and scrambled it to make a type specimen book.It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', .</p>
+            </div>
+            <div style="width:30%;border: solid 1px #fcd116;margin:0 auto;margin-top: 30px;"></div>
+        </div>
+    </div>
+</div>
+                
+            	<?php /*?><?php echo $this->page_content['page_content']; ?><?php */?>
+                
+                <?php 
+				if($this->page_content['page_id']==3){
+				?>
+				<div id="addressfooter">
+                    <div class=" bg-white footer-top">
+                        <div class="container">
+                            <div class="row margin-four">
+                                 phone 
+                                <?php 
+								if(!empty($this->site_config['site_phone'])){
+								?>
+								<div class="col-md-4 col-sm-4 text-center animateblock">
+                                	<i class="fa fa-phone fa-3x black-text"></i>
+                                	<h6 class="about-detail-text"><?php echo $this->site_config['site_phone']?></h6>
+                                </div>
+                                 end phone 
+								<?
+								}
+								
+								if(!empty($this->site_config['site_address'])){
+								?>
+								 address 
+                                <div class="col-md-4 col-sm-4 text-center animateblock">
+                                    <i class="fa fa-map-marker fa-3x small-icon black-text"></i>
+                                    <h6 class="about-detail-text"><?php echo $this->site_config['site_address']?></h6>
+                                </div>
+                                 end address 
+								<?	
+								}
+								
+                                
+                                if(!empty($this->site_config['contact_mail_address'])){
+								?>
+                                 email 
+                                <div class="col-md-4 col-sm-4 text-center animateblock">
+                                <i class="fa fa-envelope-o fa-3x small-icon black-text"></i>
+                                    <h6 class="about-detail-text">
+                                    <a href="mailto:<?php echo $this->site_config['contact_mail_address']?>" class="black-text"><?php echo $this->site_config['contact_mail_address']?></a></h6>
+                                </div>
+                                 end email 
+                                <?
+								}
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				<?	
+				}
+				?>
+                
+         
+<?
+}
+?>

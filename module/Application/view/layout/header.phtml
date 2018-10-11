@@ -1,0 +1,224 @@
+<?php
+
+use Zend\Session\Container;
+use Application\Model\AbstractModel;
+
+$AbstractModel = new AbstractModel($this->DB_ADAPTER);
+$Front_User_Session = new Container(DEFAULT_AUTH_NAMESPACE);
+ $SuperModel = $AbstractModel;	
+
+$controller = @$this->getHelperPluginManager()->getServiceLocator()->get('application')->getMvcEvent()->getRouteMatch()->getParam('controller');
+$current_action = @$this->getHelperPluginManager()->getServiceLocator()->get('application')->getMvcEvent()->getRouteMatch()->getParam('action');
+$controller1 = $controller;
+
+$controller1 = explode('\\',$controller1);
+$current_module = $controller1[0];
+$current_controller = @array_pop(explode('\\',$controller));	
+$userData = $AbstractModel->Super_Get("users","user_id='".$this->loggedUser->user_id."'","fetch");
+
+$notifyData=array();
+if(isset($this->loggedUser) && !empty($this->loggedUser)){
+	$notifyData = $AbstractModel->Super_Get("notifications","notification_user_id='".$this->loggedUser->user_id."' and notification_read_status='0'","fetchall");
+}
+
+$MenuHomeActive = '';
+
+
+$GetAllNotifications = $AbstractModel->Super_Get("notifications","notification_user_id='".$this->loggedUser->user_id."' and notification_read_status='0'","fetchAll",
+array("order"=>"notification_id DESC"));/*not_date DESC*/
+
+$NotificationCount = count($GetAllNotifications); 
+
+?>
+<?php //prd($this->pageType);?>
+<!-- HEADER -->
+
+<nav class="navbar header">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand headLogo" href="<?=SITE_HTTP_URL?>"><img src="<?php echo HTTP_IMG_PATH?>/logo.png" /></a>
+      <?php /*?><a class="navbar-brand headLogo" href="<?=SITE_HTTP_URL?>"><img src="<?php echo HTTP_IMG_PATH?>/logo-icon.png" /><span class="headText">RecoveryBooking</span></a><?php */?>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      
+     
+      <ul class="nav navbar-nav navbar-right">
+       <li class="dropdown"><a href="#" data-toggle="dropdown" class="dropdown-toggle headbtn">The Regal Way</a>
+           <ul class="headdropdown-menu dropdown-menu">
+              <li><a href="<?=$this->url('front_overview')?>"  <?php echo ($this->pageTag=='overview')?"class='active'":"class=''"?>>Overview</a></li>
+              <li><a href="<?=$this->url('front_mission')?>" <?php echo ($this->pageTag=='mission')?"class='active'":"class=''"?>>Our Mission</a></li>
+              <li><a href="<?=$this->url('front_security')?>" <?php echo ($this->pageTag=='security')?"class='active'":"class=''"?>>Security</a></li>
+            </ul>
+        
+       </li>
+       
+      <li><a href="<?=$this->url('front_services')?>" <?php echo ($this->pageTag=='services')?"class='active headbtn'":"class='headbtn'"?>>Services</a></li>
+      <li><a href="<?=$this->url('front_resources')?>" <?php echo ($this->pageTag=='resources')?"class='active headbtn'":"class='headbtn'"?>>Resources</a></li>
+       <li><a href="<?=$this->url('front_faq')?>" <?php echo ($this->pageTag=='faq')?"class='active headbtn'":"class='headbtn'"?>>FAQs</a></li>
+      <li><a href="<?=$this->url('front_blessings')?>" <?php echo ($this->pageTag=='blessings')?"class='active headbtn'":"class='headbtn'"?>>Blessings</a></li>
+       <?
+	 
+	    if(isset($this->loggedUser) && !empty($this->loggedUser)){?>
+      	 <li class="dropdown PosRel HeaderNotification">
+                        <a class="cursor dropdown-toggle NotificationAnchor" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" onclick="readnots()" style="padding:19px 17px;">
+                            <i class="fa fa-bell-o" aria-hidden="true" style="font-size:35px;color:#fcd116;"></i>
+                            <span class="badge CountBadge"><?php echo $NotificationCount;?></span>
+                        </a>
+                    
+                       	<ul class="dropdown-menu" style="min-width: 300px;background-color:#283742;padding-bottom:0;">
+                        	<div class="PosRel">
+                            	<h4 class="text-center" style="color:white;">Notifications</h4>
+                               
+                            <div class="NotificationOuter">
+                                <div class="HNotificationScroll" style="height:200px;background-color:white;padding:10px;">
+								<?php
+								if(count($GetAllNotifications)>0)
+								{
+									//prD($GetAllNotifications);
+									foreach($GetAllNotifications as $notification){ 	
+									switch($notification['notification_type'])
+									{
+										case 1: // Plan Accepted
+										$joinArr=array(
+										'0'=> array('0'=>'investment_plans','1'=>'user_plan_planid=inv_pl_id','2'=>'Left','3'=>array('inv_pl_title')));
+										$getAdminImage=$AbstractModel->Super_Get("users","user_id='1'","fetch",array("fields"=>array("user_image")));		
+										$getplandata=$AbstractModel->Super_Get("users_plan","user_plan_id='".$notification['notification_plan_id']."'","fetch",array(),$joinArr);$NText = $getplandata['inv_pl_title'].' request is accepted by Administrator';
+										$NImage=$getAdminImage['user_image'];
+										$NType = 'Plan Accepted';
+										$fontclass="smileNotifyList";
+										$NLink = $this->url("front_dashboard");
+										break;
+										
+										case 2: // Plan Rejected
+										$getAdminImage=$AbstractModel->Super_Get("users","user_id='1'","fetch",array("fields"=>array("user_image")));
+										$joinArr=array(
+										'0'=> array('0'=>'investment_plans','1'=>'user_plan_planid=inv_pl_id','2'=>'Left','3'=>array('inv_pl_title')),
+										);
+										$NImage=$getAdminImage['user_image'];
+										$getplandata=$AbstractModel->Super_Get("users_plan","user_plan_id='".$notification['notification_plan_id']."'","fetch",array(),$joinArr);$NText = $getplandata['inv_pl_title'].' request is rejected by Administrator';
+										$NType = 'Plan Rejected';
+										$fontclass="frownNotifyList";
+										$NLink = $this->url("front_dashboard");
+										break;
+										
+										case 3: // Balance Added
+										$getAdminImage=$AbstractModel->Super_Get("users","user_id='1'","fetch",array("fields"=>array("user_image")));
+										
+										$NImage=$getAdminImage['user_image'];
+										$NText =  'Balance is added by Administrator';
+										$fontclass="moneyNotifyList";
+										$NType = 'Balance';
+										$NLink = $this->url("front_dashboard");
+										break;
+										
+										case 8: // withdraw approve request
+										$getAdminImage=$AbstractModel->Super_Get("users","user_id='1'","fetch",array("fields"=>array("user_image")));
+										
+										$NImage=$getAdminImage['user_image'];
+										$NText =  'Withdraw request is approved by Administrator';
+										$fontclass="moneyNotifyList";
+										$NType = 'Withdrawal Approve';
+										
+										
+										$NLink = $this->url("front_portfolio",array("page"=>"1","transx"=>myurl_encode($notification["notification_user_bal_id"])));
+										break;
+										
+										case 9: // deposit  approve request
+										$getAdminImage=$AbstractModel->Super_Get("users","user_id='1'","fetch",array("fields"=>array("user_image")));
+										
+										$NImage=$getAdminImage['user_image'];
+										$NText =  'Deposit request is approved by Administrator';
+										$fontclass="moneyNotifyList";
+										$NType = 'Deposit Approve';
+										$NLink = $this->url("front_portfolio",array("page"=>"1","transx"=>myurl_encode($notification["notification_user_bal_id"])));
+										break;
+										case 11: // Resource Accepted
+										$joinArr=array(
+										'0'=> array('0'=>'resource','1'=>'user_res_resid=res_id','2'=>'Left','3'=>array('res_title')));
+										$getAdminImage=$AbstractModel->Super_Get("users","user_id='1'","fetch",array("fields"=>array("user_image")));		
+										$getresourcedata=$AbstractModel->Super_Get("users_resource","user_res_id='".$notification['notification_resource_id']."'","fetch",array(),$joinArr);$NText = $getresourcedata['res_title'].' request is accepted by Administrator';
+										$NImage=$getAdminImage['user_image'];
+										$NType = 'Resource Accepted';
+										$fontclass="smileNotifyList";
+										$NLink =SITE_HTTP_URL.'/dashboard?#myResourcePanel';
+										break;
+										case 12: // Resource Rejected
+										$getAdminImage=$AbstractModel->Super_Get("users","user_id='1'","fetch",array("fields"=>array("user_image")));
+										$joinArr=array(
+										'0'=> array('0'=>'resource','1'=>'user_res_resid=res_id','2'=>'Left','3'=>array('res_title')),
+										);
+										$NImage=$getAdminImage['user_image'];
+										$getresourcedata=$AbstractModel->Super_Get("users_resource","user_res_id='".$notification['notification_resource_id']."'","fetch",array(),$joinArr);$NText = $getresourcedata['res_title'].' request is rejected by Administrator';
+										$NType = 'Resource Rejected';
+										$fontclass="frownNotifyList";
+										//$NLink = $this->url("front_dashboard");
+										$NLink =SITE_HTTP_URL.'/dashboard?#myResourcePanel';
+										break;
+										case 13: // Balance Added
+										$getAdminImage=$AbstractModel->Super_Get("users","user_id='1'","fetch",array("fields"=>array("user_image")));
+										
+										$NImage=$getAdminImage['user_image'];
+										$NText =  'Prosperity is updated by Administrator';
+										$fontclass="moneyNotifyList";
+										$NType = 'Prosperity';
+										$NLink = $this->url("front_dashboard");
+										break;
+									}
+								?>
+                                
+                                    <li class="NotifyList <?php echo $fontclass?>">
+                                    	
+                                        <div class="notimgdetail">
+                                            <label><?php echo $NType;?></label>
+                                            <a href="<?php echo $NLink;?>"><?php echo $NText;?></a>
+                                        	<div class="NDate"><?php echo showPostTime($notification['notification_date']);?> ago</div>
+                                        </div>
+                                       <div class="notimg">
+                                    	<img src="<?php echo getUserImage($NImage,"60")?>"  class="img-circle"/>
+                                        </div>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+								<? }?>
+                                    <li class="text-center ShowAll">
+                                        <?php /*?><a href="<?php echo $this->url(array(),'front_notifications')?>">
+                                        	Show all&nbsp;<i class="fa fa-long-arrow-right"></i>
+                                        </a><?php */?>
+                                    </li>
+								<? }else{?>
+                                    <li class="text-center NoNotifiy">
+                                        No notifications
+                                    </li>
+								<? }?>
+                                </div>
+                            </div>
+                            </div>
+                    	</ul>
+                    </li>
+      <? }?>
+        
+        <? if(!$this->loggedUser){?>
+       
+         <li class="loginbtnLi"><a href="<?=$this->url('login')?>" class="headbtn">Log In</a></li>
+          <li class="signupbtnLi"><a href="<?=$this->url('register')?>" class="headbtn">Sign Up</a></li>
+      	<? }
+		else{ ?>
+        	
+        
+            <li class="loginbtnLi"><a href="<?=$this->url('front_dashboard')?>" class="headbtn">My Account</a></li>
+            <li class="signupbtnLi"><a href="<?=$this->url('logout')?>" class="headbtn">Log out</a></li>
+      <? }?>   
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+

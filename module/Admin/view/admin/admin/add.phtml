@@ -1,0 +1,261 @@
+<script type="application/javascript" src="<?=APPLICATION_URL?>/public/js/mediaplayer/jwplayer.js"></script>
+<div class="page-header filled full-block light">
+	<div class="row">
+        <div class="col-md-12 col-sm-12">
+        	<h2><i><span class="<?php echo $this->page_icon ?>"></span>&nbsp;<?php echo $this->pageHeading ?></i></h2>
+        	<?php /*?><p>Edit user information</p><?php */?>
+        </div>
+        
+    </div>
+    
+	
+	
+</div>
+
+<?php
+if($this->teamBox){
+	$form->setAttribute('class','team_form');
+}
+else{
+	$form->setAttribute('class','profile_form');
+}
+
+$form->prepare();
+echo $this->form()->openTag($form);
+?>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="widget-wrap">
+            <div class="widget-container">
+                <div class="widget-content">
+                    <div class="row">
+                    
+                    <div class="col-md-12"> 
+					
+                   
+                    
+                    <?php echo $this->renderForm($this->form);?> 
+                    <?php if($this->page_id==9){?>
+                    <div id="div_home_banner_img">
+                    	<div class="clearfix">&nbsp;</div>
+                    	<?php $home_banner_thumb =HTTP_HOME_IMAGES_PATH ."/160/".$this->home_mediaData[0]['hom_med_value'];?>
+                        <img src="<?php echo $home_banner_thumb?>" />
+                    </div>
+                    
+                    <div id="div_business_support_img">
+                    	<div class="clearfix">&nbsp;</div>
+                    	<?php $business_support_thumb =HTTP_HOME_IMAGES_PATH ."/160/".$this->home_mediaData[1]['hom_med_value'];?>
+                        <img src="<?php echo $business_support_thumb?>" />
+                    </div>
+                    
+                    <div id="div_business_support_video">
+                    <div class="clearfix">&nbsp;</div>
+                     <?php
+					
+					$business_support_video =HTTP_HOME_IMAGES_PATH ."/".$this->home_mediaData[2]['hom_med_value'];
+					$business_support_thumb =HTTP_HOME_IMAGES_PATH ."/".$this->home_mediaData[1]['hom_med_value'];
+				   ?>
+					<div id="play_business_support_video"></div>
+					<script>
+					$(document).ready(function(e) {
+							var videoWidth='370';var videoHeight=310;
+							jwplayer("play_business_support_video").setup({
+							flashplayer: "<?php echo APPLICATION_URL?>/public/js/mediaplayer/player.swf",
+							file: "<?=$business_support_video?>",
+							image: "<?=$business_support_thumb?>",
+							width: videoWidth,
+							autostart: false,
+							height: videoHeight,
+							'controlbar': 'none',
+							plugins: 'http://plugins.gitraffic.com/plugins/GirafficJW50Plugin.swf',
+						});
+					});	
+					</script>
+                    
+                  
+                    
+                    
+                </div>
+                    
+                     <div id="div_business_strategy_img">
+                    	 <div class="clearfix">&nbsp;</div>
+						<?php $business_strategy_thumb =HTTP_HOME_IMAGES_PATH ."/160/".$this->home_mediaData[3]['hom_med_value'];?>
+                        <img src="<?php echo $business_strategy_thumb?>" />
+                    </div>
+                    
+                    <div id="div_business_strategy_video">
+                     <div class="clearfix">&nbsp;</div>
+                     <?php
+					
+					$business_strategy_video =HTTP_HOME_IMAGES_PATH ."/".$this->home_mediaData[4]['hom_med_value'];
+					$business_strategy_thumb =HTTP_HOME_IMAGES_PATH ."/".$this->home_mediaData[3]['hom_med_value'];
+				   ?>
+					<div id="play_business_strategy_video"></div>
+					<script>
+					$(document).ready(function(e) {
+							var videoWidth='370';var videoHeight=310;
+							jwplayer("play_business_strategy_video").setup({
+							flashplayer: "<?php echo APPLICATION_URL?>/public/js/mediaplayer/player.swf",
+							file: "<?=$business_strategy_video?>",
+							image: "<?=$business_strategy_thumb?>",
+							width: videoWidth,
+							autostart: false,
+							height: videoHeight,
+							'controlbar': 'none',
+							plugins: 'http://plugins.gitraffic.com/plugins/GirafficJW50Plugin.swf',
+						});
+					});	
+					</script>
+                    
+                  
+                    
+                    
+                </div>
+                    <div id="div_company_professional_img">
+                    	 <div class="clearfix">&nbsp;</div>
+						<?php $company_professional_thumb =HTTP_HOME_IMAGES_PATH ."/160/".$this->home_mediaData[5]['hom_med_value'];?>
+                        <img src="<?php echo $company_professional_thumb?>" />
+                    </div>
+                    <div id="div_company_professional_video">
+                    <div class="clearfix">&nbsp;</div>
+                     <?php
+					
+					$company_professional_video =HTTP_HOME_IMAGES_PATH ."/".$this->home_mediaData[6]['hom_med_value'];
+					$company_professional_thumb =HTTP_HOME_IMAGES_PATH ."/".$this->home_mediaData[5]['hom_med_value'];
+				   ?>
+					<div id="play_company_professional_video"></div>
+					<script>
+					$(document).ready(function(e) {
+							var videoWidth='370';var videoHeight=310;
+							jwplayer("play_company_professional_video").setup({
+							flashplayer: "<?php echo APPLICATION_URL?>/public/js/mediaplayer/player.swf",
+							file: "<?=$company_professional_video?>",
+							image: "<?=$company_professional_thumb?>",
+							width: videoWidth,
+							autostart: false,
+							height: videoHeight,
+							'controlbar': 'none',
+							plugins: 'http://plugins.gitraffic.com/plugins/GirafficJW50Plugin.swf',
+						});
+					});	
+					</script>
+                    
+                  
+                    
+                    
+                </div>
+                    
+                    <div id="div_client_video_img">
+                    	 <div class="clearfix">&nbsp;</div>
+						<?php $client_video_thumb =HTTP_HOME_IMAGES_PATH ."/160/".$this->home_mediaData[7]['hom_med_value'];
+						
+						?>
+                        <img src="<?php echo $client_video_thumb?>" />
+                    </div>
+                    
+                    <div id="div_client_video_video">
+                     <div class="clearfix">&nbsp;</div>
+                     <?php
+					
+					$client_video_video =HTTP_HOME_IMAGES_PATH ."/".$this->home_mediaData[8]['hom_med_value'];
+					$client_video_thumb =HTTP_HOME_IMAGES_PATH ."/".$this->home_mediaData[7]['hom_med_value'];
+				   ?>
+					<div id="play_client_video_video"></div>
+					<script>
+					$(document).ready(function(e) {
+							var videoWidth='370';var videoHeight=310;
+							jwplayer("play_client_video_video").setup({
+							flashplayer: "<?php echo APPLICATION_URL?>/public/js/mediaplayer/player.swf",
+							file: "<?=$client_video_video?>",
+							image: "<?=$client_video_thumb?>",
+							width: videoWidth,
+							autostart: false,
+							height: videoHeight,
+							'controlbar': 'none',
+							plugins: 'http://plugins.gitraffic.com/plugins/GirafficJW50Plugin.swf',
+						});
+					});	
+					</script>
+                    
+                  
+                    
+                    
+                </div>
+                    
+                    <? }?>
+                    </div>
+                    
+					<?php
+					if($this->userBox){
+					?>
+                    <div id="imageDiv" style="border-top: 2px solid #f7f7f7;padding-top: 15px;display: inline-block;width: 100%;margin-top: 30px;">
+                    	<p style="font-weight:bold;text-decoration:underline">User Current Image</p>
+                        <img src="<?php echo HTTP_PROFILE_IMAGES_PATH ?>/<?php echo $this->userData['user_image']?>" class="img-responsive" width="300" />
+                    </div>
+					<?	
+					}
+                    ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+var EcUserId = '<?php echo $this->user_id?>';
+var page_id = '<?php echo $this->page_id?>';
+var slider_id = '<?php echo $this->slider_id?>';
+var ad_id = '<?php echo $this->ad_id?>';
+var language='<?php echo $this->language?>';
+var ekey='<?php echo $this->ekey?>';
+$(document).ready(function(e) {
+	
+	CKEDITOR.config.allowedContent = true;
+	CKEDITOR.config.protectedSource.push(/<i[^>]*><\/i>/g);
+	 if(controllerName=='staticcontroller' && actionName=='index'){
+		$("#site_logo").closest(".form-group").after($("#SiteLogo"));
+		$('#SiteLogo').removeClass('hide');
+		
+		$("#site_video").closest(".form-group").after($("#SiteVideo"));
+		$('#SiteVideo').removeClass('hide');
+	}
+	else if(controllerName=='staticcontroller' && actionName=='manageresource'){
+		CKEDITOR.replace('res_desc',{toolbar :[['Source'],['Bold','Italic','Underline'],['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],['TextColor'],
+		['Format'],['FontSize']],height: 250}); 
+	}
+	else if(controllerName=='staticcontroller' && actionName=='editpages'){
+		CKEDITOR.replace('page_content',{toolbar :[['Source'],['Bold','Italic','Underline'],['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],['TextColor'],
+		['Format'],['FontSize']],height: 250}); 
+	}
+	else if(controllerName=='staticcontroller' && actionName=='editemailtemplate'){
+		CKEDITOR.replace('emailtemp_content',{toolbar :[['Source'],['Bold','Italic','Underline'],['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],['TextColor'],
+		['Format'],['FontSize']],height: 250}); 
+	}
+	else if(controllerName=='staticcontroller' && actionName=='managejobs'){
+		CKEDITOR.replace('job_desc',{toolbar :[['Source'],['Bold','Italic','Underline'],['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],['TextColor'],
+		['Format'],['FontSize']],height: 250}); 
+	}
+	$('#home_banner_image').after($('#div_home_banner_img'));
+	$('#business_strategy_image').after($('#div_business_strategy_img'));
+	$('#business_strategy_video').after($('#div_business_strategy_video')); 
+	$('#business_support_image').after($('#div_business_support_img'));
+	$('#business_support_video').after($('#div_business_support_video')); 
+	$('#company_professional_image').after($('#div_company_professional_img'));
+	$('#company_professional_video').after($('#div_company_professional_video')); 
+	$('#client_video_image').after($('#div_client_video_img'));
+	$('#client_video').after($('#div_client_video_video')); 
+	
+});
+
+$(document).ready(function(e) {
+	jQuery.validator.addClassRules("checkotherusername",{remote: baseUrl+"/checkotherusername?user=<?php echo $this->user_id?>"});
+	jQuery.validator.addClassRules("checkotheremail",{remote: baseUrl+"/checkotheremail?user=<?php echo $this->user_id?>"});
+	$('#emailtemp_langid').change(function(e) {
+     
+	    window.location.href=baseUrl+'/editemailtemplate/'+ekey+'/'+$('#emailtemp_langid').val();
+    });
+});
+</script>

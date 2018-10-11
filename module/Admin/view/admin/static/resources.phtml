@@ -1,0 +1,71 @@
+ 
+<style>
+#result {
+        border: 1px solid #888;
+        background: #f7f7f7;
+        padding: 1em;
+        margin-bottom: 1em;
+    }
+</style>
+<div class="page-header filled full-block light">
+	<h2><i><span class="<?php echo $this->page_icon ?>"></span>&nbsp;<?php echo $this->pageHeading ?></i></h2>
+</div>
+<div class="widget-wrap">
+	
+  <div class="widget-container">
+  	
+    <div class="widget-content">
+    <div id="flash-message" class="alert alert-dismissable" style="display:none; margin:20px;"></div>
+    <form method="post" action="<?php echo ADMIN_APPLICATION_URL?>/removeresource" onsubmit="return checkSelects()" >
+          <div class="table-toolbar">
+           <div class="btn-group">
+                        	<a href="<?php echo ADMIN_APPLICATION_URL?>/manageresource" class="btn btn-success"> <i class="fa fa-plus"></i> Add Resource </a>
+                        </div>
+            <div class="btn-group">
+              <button id="sample_editable_1_new" class="btn btn-danger"> <i class="fa fa-trash-o"></i> Delete Selected </button>
+            </div>
+          </div>
+          <div class="clearfix">&nbsp;</div>
+        <table id="sample_1" class="table table-striped table-bordered table-hover dataTable">
+          <thead>
+            <tr>
+              <th width="5%">S.No.</th>
+               <th width="5%"><input type="checkbox" class="group-checkable"  data-set="#sample_1 .checkboxes"  name="deletebcchk" id="deletebcchk" /></th>
+              <th width="40%">Title</th>
+             
+              <th width="14%">Last Modified</th>
+              <th width="8%">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+        </form>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(e) {
+	var table=$('#sample_1').dataTable( {
+		"bProcessing": true,
+		"bServerSide": true,
+		"aaSorting": [[ 1, "asc" ]],
+		
+ 		"sAjaxSource": "<?php echo APPLICATION_URL.'/'.BACKEND?>/getresources" ,
+		"aoColumnDefs": 
+		 [
+			{ "bSortable": false, "aTargets": [1,3,4] },
+ 		 
+		 ],
+		"iDisplayLength":50,
+	    "aLengthMenu": [[50, 100, 500, -1], [50, 100, 500, "All"]],
+		"fnDrawCallback": function( oSettings ) {re_init();}
+	} );
+	
+});
+
+
+
+
+</script>

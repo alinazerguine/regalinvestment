@@ -1,0 +1,30 @@
+<?php 
+	$controller = @$this->getHelperPluginManager()->getServiceLocator()->get('application')->getMvcEvent()->getRouteMatch()->getParam('controller');
+	$current_action = @$this->getHelperPluginManager()->getServiceLocator()->get('application')->getMvcEvent()->getRouteMatch()->getParam('action');
+	$explode_controller = explode('\\', $controller);	
+	$current_module = @$explode_controller[0];
+	$current_controller = @array_pop(explode('\\', $controller));		
+?>
+<?php
+    echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => HTTP_IMG_PATH.'/favicon.ico'))
+   ->prependStylesheet(PLUGIN_PATH.'/bootstrap-datepicker/css/bootstrap-datepicker.min.css')
+    ->prependStylesheet(ASSET_CSS.'/responsive.css')
+	->prependStylesheet(ASSET_CSS.'/style.css')
+    ->prependStylesheet(PLUGIN_PATH.'/material-font/css/material-design-iconic-font.min.css')
+	->prependStylesheet(ASSET_CSS.'/common.css')	
+    ->prependStylesheet(ASSET_CSS.'/bootstrap-extend.css')				
+    ->prependStylesheet(ASSET_CSS.'/pages.css')
+    ->prependStylesheet(ASSET_CSS.'/plugins.css')	
+    ->prependStylesheet(ASSET_CSS.'/widgets.css')
+    ->prependStylesheet(ASSET_CSS.'/components.css')
+    ->prependStylesheet(ASSET_CSS.'/layout.css')			
+    ->prependStylesheet(ASSET_CSS.'/animate.css')
+    ->prependStylesheet(ASSET_CSS.'/bootstrap.css')  	
+    ->prependStylesheet(ASSET_CSS.'/font-awesome.css')
+	->prependStylesheet(PLUGIN_PATH.'/datatables/plugins/bootstrap/dataTables.bootstrap.css')
+	->prependStylesheet(PLUGIN_PATH.'/datatables/extensions/TableTools/css/dataTables.tableTools.min.css')
+	->prependStylesheet(PLUGIN_PATH.'/bootstrap-datetimepicker1/jquery.datetimepicker.css');
+
+/* if($current_controller=="ConsultingrequestController" && $current_action=="consavailabletimesetting"){
+	->prependStylesheet(PLUGIN_PATH.'/datatables/plugins/bootstrap/dataTables.bootstrap.css');
+ }*/

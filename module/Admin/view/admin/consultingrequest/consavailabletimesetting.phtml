@@ -1,0 +1,183 @@
+
+<style type="text/css">
+ul#info_ul span {
+	color:#e35b5a;
+	font-weight:bold;
+}
+.widget-wrap {
+	min-height:auto
+}
+.label_container label{display:block;}
+.paddleft0 {
+    padding-left: 0;
+}
+.paddright0 {
+    padding-right: 0;
+}
+
+.close_days_wrapper input[type="checkbox"]{ display:inline-block; width:15px; height:15px;}
+.close_days_wrapper label{ padding-right:10px; color:#868686;}
+.regal_investment_none{display:none;}
+.show_custom_error{ padding:0px 15px; color: #a94442;}
+@media (max-width: 767px) {
+	.lastelem{padding-left:0;padding-right:0;}
+}
+
+
+</style>
+
+
+    <div class="page-header filled full-block light">
+        <div class="row">
+            <div class="col-md-12">
+            	<h2><i><span class="<?php echo $this->page_icon ?>"></span>&nbsp;<?php echo $this->pageHeading ?></i></h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="widget-wrap">
+        <div class="widget-container">
+            <div class="widget-content">
+
+                <form name="consult_form" action="" method="post" class="profile_form" enctype="multipart/form-data" id="availabetimeSettingFormDiv">
+                    <?php /*?><?php echo $this->renderForm($this->form);?> <?php */?>
+                    <div class="show_custom_error regal_investment_none"></div>
+                     <div class="col-sm-4 form-group">
+                      <label for="start_time">Start Time</label>
+                        
+                        <?= $this->formElement($form->get('open_time'))?>
+                      </div>
+                      <div class="col-sm-4 form-group">
+                        <label for="end_time">End Time</label>
+                       <?= $this->formElement($form->get('close_time'))?>
+                     </div>
+                     
+                      <div class="col-sm-4 form-group">
+                        <label for="time_slots">Time Slots</label>
+                       <?= $this->formElement($form->get('time_slots'))?>
+                     </div>
+                     <div class="clearfix"></div>
+                     <div class="col-sm-12 form-group">
+                        <label for="time_slots">Closing Days</label>
+                        <div class="close_days_wrapper">
+                        <?= $this->formElement($form->get('closing_days'))?>
+                       </div>
+                     </div>
+                
+                    <div class="clearfix">&nbsp;</div>
+                    <div class="clearfix">&nbsp;</div>	
+                    <div class="text-center"><button type="button" id="checkRes" class="btn site-btn SiteButton">Submit</button></div>
+                    <div class="clearfix"></div>
+                </form>
+                     
+            </div>
+        </div>
+    </div>
+    
+
+<script>
+var DateObj ={};
+$(function(){
+
+DateObj.startTime = '<?=$this->setting_data['open_time']?>';
+DateObj.endTime = '<?=$this->setting_data['close_time']?>';
+ 
+	$('.start_end_common').datetimepicker({
+		 //timepicker:false,
+		datepicker:false,
+		format:'H:i',
+		step:30,
+	 });
+	 
+	 
+
+	 
+	var lenghtOfCheckBox=0;
+	var count = 1;
+	
+	$('.close_days_wrapper input[type="checkbox"]').each(function(i , index) {
+           
+      lenghtOfCheckBox = count++;
+	  if(lenghtOfCheckBox >7){
+		   count = 2;
+		   $(this).parent('label').before('<br>');
+	  }
+	});
+	
+  
+
+	
+});
+
+
+/*$("form[name='consult_form']").on("submit",function(e){
+	e.preventDefault();
+	alert("Choose Time properly");
+	window.history.back();
+})*/
+
+$("#checkRes").click(function(event) {
+	
+	if($('#availabetimeSettingFormDiv').valid()){
+		var checkRes = checkTime();
+		console.log(checkRes);
+		if(checkRes==true){
+			$('#availabetimeSettingFormDiv').submit();
+		}
+	}
+});
+
+
+function checkTime(){
+	console.log(DateObj);
+	var d = new Date();
+
+	var month = d.getMonth()+1;
+	var day = d.getDate();
+
+
+	var currentDate = d.getFullYear() + '-' +
+    ((''+month).length<2 ? '0' : '') + month + '-' +
+    ((''+day).length<2 ? '0' : '') + day;
+	
+	DateObj.NewStarTime = currentDate+' '+DateObj.startTime;
+	DateObj.NewEndTime = currentDate+' '+ DateObj.endTime;
+
+	if(DateObj.NewEndTime<DateObj.NewStarTime){
+		return false;
+	}
+	else{
+		return true;
+	}
+ 
+}
+$(document).on('change','.start_time',function(e){
+	DateObj.startTime = $('.start_time').val();
+	DateObj.endTime = $('.end_time').val();
+	
+	var checkResponse = checkTime();
+	if(checkResponse==false){
+		$('.show_custom_error').html('Please select valid time');
+		$('.widget-content').find('.regal_investment_none').removeClass('regal_investment_none');
+	}else{
+		$('.show_custom_error').html('');
+		$('.widget-content').find('.show_custom_error').addClass('regal_investment_none');
+	}
+	
+});
+
+$(document).on('change','.end_time',function(e){
+	DateObj.startTime = $('.start_time').val();
+	DateObj.endTime = $('.end_time').val();
+	var checkResponse = checkTime();
+	if(checkResponse==false){
+		$('.show_custom_error').html('Please select valid time');
+		$('.widget-content').find('.regal_investment_none').removeClass('regal_investment_none');
+	}else{
+		$('.show_custom_error').html('');
+		$('.widget-content').find('.show_custom_error').addClass('regal_investment_none');
+	}
+	
+});
+
+</script>

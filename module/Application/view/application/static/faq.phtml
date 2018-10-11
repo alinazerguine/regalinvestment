@@ -1,0 +1,251 @@
+<?php if(true){?>
+<link href="<?php echo SITE_HTTP_URL?>/public/plugins/faq/css/theme9.css" media="screen" rel="stylesheet" type="text/css">
+<?php /*?><div class="staticheadBlock">
+    				<div class="staticchildBlock">
+                    	<div class="container">
+                        	<div class="row">
+        							<div class="staticTextBlock">
+    						Frequent Questions<sub><b class="staticsubTextBlock">&nbsp;part of your questions<span class="fa fa-question"></span>...</b></sub>
+       					 </div>	
+                         	</div>
+       				 	</div>
+                     </div>
+    
+   				 </div><?php */?>
+<?php echo $this->page_content['page_content']?>
+<div style="width:30%;border: solid 1px #fcd116;margin:0 auto;margin-top: 30px;"></div>
+<div class="clearfix">&nbsp;</div>
+    
+<div class="container">
+		<div class="row">
+		
+		<?php if(!empty($this->faqData)){?>
+		
+		
+		<div class="jag-faq-theme9 jag-faq-random-colors jag-flip-horizontal">
+			
+            <?php 
+			$i=1;
+			foreach($this->faqData as $kfaq=>$kvalue){?>
+            <div class="col-xs-12 col-sm-6 col-md-4 jag-flip-faq-wraper"> 
+				<div class="jag-flip-faq">
+				  <div class="front jag-equalheight jag-equalheight"> 
+					<span class="jag-faq-question-number">
+						<?php echo $i;?>
+					</span>
+					<div class="jag-faq-question">
+						<?php echo $kvalue['faq_question']?>
+					</div>
+				  </div> 
+				  <div class="back jag-equalheight jag-equalheight">
+					<div class="jag-faq-question">
+						Q. <?php echo $kvalue['faq_question']?>
+					</div>
+					<div class="jag-faq-answer">
+						<?php
+						
+						$length=strlen($kvalue['faq_answer']);
+						$txt=nl2br($kvalue['faq_answer']);
+						if($length > 200){
+							$txt=substr(nl2br($kvalue['faq_answer']),0,200).'....';	
+						}
+						echo $txt;
+						 
+						 ?>
+							
+						<!-- Trigger the modal with a button -->
+                        <?php if($length > 60){?>
+						<div class="jag-faq-readmore">
+							<?php /*?><a href="#" data-toggle="modal" data-target="#jag-faq-answer-1">Read More</a><?php */?>
+                            <a onclick="getfaq('<?php echo myurl_encode($kvalue['faq_id'])?>')" class="cursor">Read More</a>
+						</div>
+                        <? }?>
+					</div>
+				  </div> 
+				</div>
+			</div>
+            
+            <? $i++;}?>
+            <?php if(false){?>
+            
+			<div class="col-xs-12 col-sm-6 col-md-4 jag-flip-faq-wraper"> 
+				<div class="jag-flip-faq">
+				  <div class="front jag-equalheight jag-equalheight"> 
+					<span class="jag-faq-question-number">
+						2
+					</span>
+					<div class="jag-faq-question">
+						Types of layout are included in JAG FAQ Responsive HTML?
+					</div>
+				  </div> 
+				  <div class="back jag-equalheight jag-equalheight">
+					<div class="jag-faq-question">
+						Q. Types of layout are included in JAG FAQ Responsive HTML?
+					</div>
+					<div class="jag-faq-answer">
+						<strong>1) Accordian </strong><br>
+							Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet. Lorem ipsum dolor sitm ipsum dolor sit amet....  <br>
+							
+						<!-- Trigger the modal with a button -->
+						<div class="jag-faq-readmore">
+							<a href="#" data-toggle="modal" data-target="#jag-faq-answer-1">Read More</a>
+						</div>
+					</div>
+				  </div> 
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 jag-flip-faq-wraper"> 
+				<div class="jag-flip-faq">
+				  <div class="front jag-equalheight jag-equalheight"> 
+					<span class="jag-faq-question-number">
+						3
+					</span>
+					<div class="jag-faq-question">
+						Types of layout are included in JAG FAQ Responsive HTML?
+					</div>
+				  </div> 
+				  <div class="back jag-equalheight jag-equalheight">
+					<div class="jag-faq-question">
+						Q. Types of layout are included in JAG FAQ Responsive HTML?
+					</div>
+					<div class="jag-faq-answer">
+						<strong>1) Accordian </strong><br>
+							Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet. Lorem ipsum dolor sitm ipsum dolor sit amet....  <br>
+							
+						<!-- Trigger the modal with a button -->
+						<div class="jag-faq-readmore">
+							<a href="#" data-toggle="modal" data-target="#jag-faq-answer-1">Read More</a>
+						</div>
+					</div>
+				  </div> 
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 jag-flip-faq-wraper"> 
+				<div class="jag-flip-faq">
+				  <div class="front jag-equalheight"> 
+					<span class="jag-faq-question-number">
+						4
+					</span>
+					<div class="jag-faq-question">
+						How to integrate JAG FAQ visual composer addon ?
+					</div>
+				  </div> 
+				  <div class="back jag-equalheight">
+					<div class="jag-faq-question">
+						Q. How to integrate JAG FAQ visual composer addon ?
+					</div>
+					<div class="jag-faq-answer">
+						To configure JAG FAQ Visual composer addon: <br>
+						You can implement following steps: <br>
+						1) Open Dashboard <br>
+						<!-- Trigger the modal with a button -->
+						<div class="jag-faq-readmore">
+							<a href="#" data-toggle="modal" data-target="#jag-faq-answer-1">Read More</a>
+						</div>
+					</div>
+				  </div> 
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 jag-flip-faq-wraper"> 
+				<div class="jag-flip-faq">
+				  <div class="front jag-equalheight"> 
+					<span class="jag-faq-question-number">
+						5
+					</span>
+					<div class="jag-faq-question">
+						How to integrate JAG FAQ visual composer addon ?
+					</div>
+				  </div> 
+				  <div class="back jag-equalheight">
+					<div class="jag-faq-question">
+						Q. How to integrate JAG FAQ visual composer addon ?
+					</div>
+					<div class="jag-faq-answer">
+						To configure JAG FAQ Visual composer addon: <br>
+						You can implement following steps: <br>
+						1) Open Dashboard <br>
+						<!-- Trigger the modal with a button -->
+						<div class="jag-faq-readmore">
+							<a href="#" data-toggle="modal" data-target="#jag-faq-answer-1">Read More</a>
+						</div>
+					</div>
+				  </div> 
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4 jag-flip-faq-wraper"> 
+				<div class="jag-flip-faq">
+				  <div class="front jag-equalheight"> 
+					<span class="jag-faq-question-number">
+						6
+					</span>
+					<div class="jag-faq-question">
+						How to integrate JAG FAQ visual composer addon ?
+					</div>
+				  </div> 
+				  <div class="back jag-equalheight">
+					<div class="jag-faq-question">
+						Q. How to integrate JAG FAQ visual composer addon ?
+					</div>
+					<div class="jag-faq-answer">
+						To configure JAG FAQ Visual composer addon: <br>
+						You can implement following steps: <br>
+						1) Open Dashboard <br>
+						<!-- Trigger the modal with a button -->
+						<div class="jag-faq-readmore">
+							<a href="#" data-toggle="modal" data-target="#jag-faq-answer-1">Read More</a>
+						</div>
+					</div>
+				  </div> 
+				</div>
+			</div>
+           <?  }?>
+		</div>
+        <? }?>
+		<!-- end faq theme 9 -->
+	</div>
+	</div>
+    <div style="width:30%;border: solid 1px #fcd116;margin:0 auto;margin-top: 30px;"></div>
+<div class="clearfix">&nbsp;</div>
+	<!-- Modal -->
+	<div id="jag-faq-answer-1" class="modal fade" role="dialog" tabindex="-1">
+	  <div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Q. What type of layouts are included in JAG FAQ Responsive HTML?</h4>
+		  </div>
+		  <div class="modal-body">
+				<strong>Types of layout:</strong> <br>
+				<strong>1) Accordian </strong><br>
+				Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. 
+				Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. 
+				Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. 
+				Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. 
+				Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.  <br><br>
+				
+				<strong> 2) Flip with grid </strong><br>
+				Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. 
+				Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. 
+				Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. <br><br>
+				
+				<strong>3) Simple Listing </strong><br>
+				Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. 
+				Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.  <br><br>
+			
+		  </div>
+          
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<!-- End Modal -->
+
+
+<script type="text/javascript" src="<?php echo SITE_HTTP_URL?>/public/plugins/faq/js/flip.js"></script>
+<script type="text/javascript" src="<?php echo SITE_HTTP_URL?>/public/plugins/faq/js/jquery.matchHeight.js"></script>
+<script type="text/javascript" src="<?php echo SITE_HTTP_URL?>/public/plugins/faq/js/jag-faq-custom.js"></script>
+
+<? }?>

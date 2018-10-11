@@ -1,0 +1,138 @@
+<link href="<?=PLUGIN_PATH?>/bootstrap-fileinput/bootstrap-fileinput.css" media="screen" rel="stylesheet" type="text/css" >
+<script type="text/javascript" src="<?=PLUGIN_PATH?>/bootstrap-fileinput/bootstrap-fileinput.js"></script>
+
+<? $image = getUserImage($adminData['user_image'],"300"); ?>
+<div class="row">
+<div class="container-fluid">
+<div class="content-div">
+  <form action="" class="profile_form j-forms" novalidate="" method="post" enctype="multipart/form-data">	
+  <div class="row">
+    <div class="col-md-4">
+    	<div class="page-header filled full-block light">
+			<h2><i><span class="fa fa-image"></span>&nbsp;Profile Image</i></h2>
+           
+        </div>
+      <div class="widget-wrap">
+        <div class="widget-container">
+          <div class="widget-content">
+            <div class="row">
+              <div class="content">
+                <div class="form-group text-center">
+                  <div class="fileinput fileinput-new" data-provides="fileinput">
+                    <div class="fileinput-new thumbnail" style="max-width: 350px; max-height: 350px; margin-bottom:10px;"> <img src="<?php echo $image?>" alt=""/> </div>
+                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 350px; max-height: 350px;"> </div>
+                    <div class="text-center"> <span class="btn btn-primary btn-fill btn-file "> <span class="fileinput-new"> Select image </span> <span class="fileinput-exists"> Change </span>                     
+                      <?=$this->formElement($form->get('user_image'));?>
+                      </span> <a href="#" class="btn btn-danger btn-fill fileinput-exists" data-dismiss="fileinput">Remove User </a> </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+    	<div class="page-header filled full-block light">
+			<h2><i><span class="fa fa-user-circle"></span>&nbsp;Update Account</i></h2>
+        </div>
+      <div class="widget-wrap profile-widget-wrap">
+        <div class="widget-container">
+          <div class="widget-content">
+            <div class="row">             
+                <div class="form-content"> 
+              
+                  <!-- start text password -->
+                  <div class="row">
+                    <div class="col-md-6 unit form-group">
+                      <label class="label">
+                        <?=$this->formLabel($form->get('user_name'))?>
+                      </label>
+                      <div class="input form-group">
+                        <label class="icon-left" for="text"> <i class="fa fa-user"></i> </label>
+                        <?= $this->formElement($form->get('user_name'))?>
+                      </div>
+                    </div>
+                    <div class="col-md-6 unit form-group">
+                      <label class="label">
+                        <?=$this->formLabel($form->get('user_email'))?>
+                      </label>
+                      <div class="input form-group">
+                        <label class="icon-left" for="email"> <i class="fa fa-envelope-o"></i> </label>
+                        <?=$this->formElement($form->get('user_email'))?>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 unit form-group">
+                      <label class="label">
+                        <?=$this->formLabel($form->get('user_address'))?>
+                      </label>
+                      <div class="input form-group">
+                        <label class="icon-left" for="text"> <i class="fa fa-map-marker"></i> </label>
+                        <?= $this->formElement($form->get('user_address'))?>
+                      </div>
+                    </div>
+                    <div class="col-md-6 unit form-group">
+                      <label class="label">
+                        <?=$this->formLabel($form->get('user_city'))?>
+                      </label>
+                      <div class="input form-group">
+                        <label class="icon-left" for="email"> <i class="fa fa-map-marker"></i> </label>
+                        <?=$this->formElement($form->get('user_city'))?>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 unit form-group">
+                      <label class="label">
+                        <?=$this->formLabel($form->get('user_state'))?>
+                      </label>
+                      <div class="input form-group">
+                        <label class="icon-left" for="text"> <i class="fa fa-map-marker"></i> </label>
+                        <?= $this->formElement($form->get('user_state'))?>
+                      </div>
+                    </div>
+                    <div class="col-md-6 unit form-group">
+                      <label class="label">
+                        <?=$this->formLabel($form->get('user_country'))?>
+                      </label>
+                      <div class="input form-group">
+                        <label class="icon-left" for="email"> <i class="fa fa-map-marker"></i> </label>
+                        <?=$this->formElement($form->get('user_country'))?>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-md-6 unit form-group">
+                      <label class="label">
+                        <?=$this->formLabel($form->get('user_phone'))?>
+                      </label>
+                      <div class="input form-group">
+                        <label class="icon-left" for="text"> <i class="fa fa-phone"></i> </label>
+                        <?= $this->formElement($form->get('user_phone'))?>
+                      </div>
+                    </div>
+                    <div class="col-md-6 unit">
+                    </div>
+                  </div>
+                </div>
+                <!-- end /.content -->
+                
+                <div class="form-footer text-center">
+                  <button type="submit" class="btn site-btn SiteButton">Submit</button>
+                </div>
+                <!-- end /.footer -->
+                
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+ </div>
+</div>
+</div>

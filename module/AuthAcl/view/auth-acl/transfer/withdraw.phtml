@@ -1,0 +1,173 @@
+
+<div id="grad" class="animated fadeIn element_block">
+<div class="makediv relative">
+<?php echo $this->render("auth-acl/profile/_profile_side_bar.phtml"); ?>
+
+
+	<div class="main-content container" >
+
+		<div class="menu">
+        
+				<form action="" method="post" class="profile_form" enctype="multipart/form-data" id="profileFormDiv">
+                   		
+                        <div class="col-sm-12 contentborder lastelem paddleft0"  style="margin-top:60px;">
+                    				<div class="pull-left BlackHead" ><h3><b>Withdraw Account</b></h3></div>
+                                    <?php $number_balance=number_format($this->userData['user_balance'], 2, '.', ',');?>
+        							 <div class="pull-right BlackHead">
+                         					<h3><b>Balance : <?php echo $this->userData['user_balance'] > 0?PRICE_SYMBOL.($number_balance):'0.00'?></b></h3>
+                        		 </div>
+                                    
+                                    
+                   			</div>
+                            <div class="clearfix">&nbsp;</div>
+                        
+                        
+                         <div class="ProfileConDiv inlineform" style="margin-top:10px;">
+                         
+                         <div class="panel-body" align="left">
+                         	<div class="col-sm-12">
+                            
+                        			<div class="clearfix">&nbsp;</div>
+                    
+                                   <div class=" depositbox" style="max-width:550px;border:none;">
+                                     <div class="col-sm-12 col-xs-12 lastelem form-group">
+                                        <label for="Amount">Withdraw Amount  <a href="#"><span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-original-title="Your Balance is <?php echo $this->userData['user_balance'] > 0?PRICE_SYMBOL.removedecimal($this->userData['user_balance']):0?>" style="color:#fcd116;"></span></a></label>
+                                        <div>
+                                        <?php echo $this->formElement($form->get('withdraw_amount'))?>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-sm-12 col-xs-12 lastelem form-group ">
+                                        <label for="user_last_name">Currency</label>
+                                        <div>
+                                        <?php echo $this->formElement($form->get('withdraw_currency'))?>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-xs-12 lastelem form-group ">
+                                        <label for="user_email">Method</label>
+                                         <div>
+                                         
+										<?php echo $this->formElement($form->get('withdraw_method'))?>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix">&nbsp;</div>
+                                    <div class="text-center"><?php echo $this->formElement($form->get('bttnsubmit'))?></div>
+                                </div>
+                              
+                                 <?php /*?><div class="makediv deposit-panel-container">
+                                 	 <div class="deposit-panel-inner">
+                                     	<div class="deposit-panel">
+                                       
+                                        <div class="deposit-check"><span class="fa fa-check-circle"></span></div>
+                                     	
+                                        <div>Your deposit request has been received.Your account will be funded once your deposit is processed.</div>									
+                                     	</div>
+                                     </div>
+                                 </div><?php */?>
+                                 <?php /*?><div class="makediv margtop30 TransferTable">
+                                 		<div class="col-sm-4 lastelem paddleft0">
+                                        	
+                                           
+                                    		  <div class="wire-tranfer-confirm">Wire Transfer Confirmation</div>
+                                              <div class="wire-tranfer-notify">Your notilication to Regal Investments to deposit {pay_currency} {pay_amount} via wire transfer has been confirmed.</div>
+											<div class="wire-tranfer-notify">To complete the actual transfer of funds, follow the Instruction below</div> 
+											<div>
+                                            	<div class="wire-instruction-head">Instruction</div>
+                                            	<ul class="wire-instruction">
+                                                            <li>Print this page by clicking the Print button below.</li>
+                                                            <li>Visit your bank and request the Wire transfer to your RI account.</li>
+                                                            <li>You must provde me following information to your bank to initiate the Wire Transfer.</li> 
+												</ul>
+                                            </div>
+													
+                                        </div>
+                                        <div class="col-sm-8">
+                                        		<div class="row">
+                                        		<div class="wire-tranfer-confirm text-center">Routing Details</div>
+                                                <table>
+                                                    <tr><td>Bank Name</td><td>The Bank of Montreal (SMO)</td></tr>
+                                                    <tr><td>Bank Address</td><td>591 Queen St W, Toronto, ON M5V 2B7</td></tr>
+                                                    <tr><td>SWIFT BIC Code</td><td>BOFM CA T2</td></tr>
+                                                    <tr><td>ABA Number</td><td>CC000103882</td></tr>
+                                                    <tr><td>Bank Account Name</td><td>Regal holdings Canada Inc</td></tr>
+                                                    <tr><td>Bank Account Address </td><td>250 Yonge St #2201 , Toronto, ON M5B 2L7 </td></tr>
+                                                    <tr><td>Bank Account Number  </td><td>038821995151 cr 038821995151 </td></tr>
+                                                    <tr><td>For further benefit to </td><td>{Customer name} </td></tr>
+
+                                                    
+                                                </table>
+                                                </div>
+                                                
+                                        </div>
+                                 </div><?php */?>
+                                                
+                                   
+                                       
+                                       <?php /*?><div class="makediv margtop30 TransferTable">
+                                 		<div class="col-sm-4 lastelem paddleft0">
+                                        	
+                                           
+                                    		  <div class="wire-tranfer-confirm">Interac E-Transfer Confirmation</div>
+                                              <div class="wire-tranfer-notify">Your notilication to Regal Investments to deposit {pay_currency} {pay_amount} via interac e-transfer has been confirmed.</div>
+											<div class="wire-tranfer-notify">To complete the actual transfer of funds, follow the Instruction below</div> 
+											<div>
+                                            	<div class="wire-instruction-head">Instruction</div>
+                                            	<ul class="wire-instruction">
+                                                            <li>Log in to your online bank.</li>
+                                                            <li>Initiate an interac e-transfer</li>
+                                                            <li>Notice: there is a sending and receiver limit on interac e-transfer, initiating the transfer cannot guarantee your account will be funded. </li> 
+												</ul>
+                                            </div>
+													
+                                        </div>
+                                        <div class="col-sm-8">
+                                        		<div class="row">
+                                        		<div class="wire-tranfer-confirm text-center">Interac e-transfer details</div>
+                                                <table>
+                                                    <tr><td>Receiving email</td><td>prosper@regDIinve5trnerits.ca</td></tr>
+                                                    <tr><td>Bank Address</td><td>591 Queen St W, Toronto, ON M5V 2B7</td></tr>
+                                                    <tr><td>SWIFT BIC Code</td><td>BOFM CA T2</td></tr>
+                                                    <tr><td>ABA Number</td><td>CC000103882</td></tr>
+                                                    <tr><td>Bank Account Name</td><td>Regal holdings Canada Inc</td></tr>
+                                                    <tr><td>Bank Account Address </td><td>250 Yonge St #2201 , Toronto, ON M5B 2L7 </td></tr>
+                                                    <tr><td>Bank Account Number  </td><td>038821995151 cr 038821995151 </td></tr>
+                                                    <tr><td>For further benefit to </td><td>{Customer name} </td></tr>
+
+                                                    
+                                                </table>
+                                                </div>
+                                                
+                                        </div>
+                                 </div><?php */?>               
+                                                 
+                                                
+                                                
+                                                
+                                                
+                                 
+                            <div class="clearfix">&nbsp;</div>                 
+                             </div>              
+                               
+                    		</div>            
+                        				    
+                     	 </div>
+                       
+                    
+                    	
+                    
+					<p class="clearfix">&nbsp;</p>
+                    	
+                    </form>
+			
+
+		</div>
+
+	</div>
+    </div>
+   </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>

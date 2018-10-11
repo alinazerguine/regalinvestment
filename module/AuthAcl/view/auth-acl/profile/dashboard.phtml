@@ -1,0 +1,329 @@
+<script src="<?php echo SITE_HTTP_URL?>/public/js/highcharts.js"></script>
+<div id="grad" class="animated fadeIn element_block" >
+		<div class="makediv relative">
+			<?php echo $this->render("auth-acl/profile/_profile_side_bar.phtml"); ?>
+			<div class="main-content container">
+    	 				<div style="padding: 30px 0;">
+         				<div class="makediv props-earns" style="margin-bottom:20px;">
+        <?php /*?> <div class="col-sm-4 lastelem paddleft0 plantxt">Total Prosperity : <?php echo $this->tot_Prosperity?></div>
+         <div class="col-sm-4 lastelem paddleft0 plantxt text-center">Total Earnings : 0</div><?php */?>
+         				<div class="col-sm-8">
+							<?php if($this->userData['user_balance']== 0){?>
+                            <div class="alert alert-warning fade in balanceAlert">
+                                ACTION REQUIRED : You will need to fund your account before you can begin.
+                            </div>
+                            <? }?>
+             			</div>
+         				<div class="col-sm-4 lastelem text-right plantxt" style="padding-top:0;">
+        				 <?php $number_balance=number_format($this->userData['user_balance'], 2, '.', ',');?>
+        				 <div style="margin-bottom:10px;"> 
+                         		Balance : <?php echo $this->userData['user_balance'] > 0?PRICE_SYMBOL.($number_balance):'0.00'?>
+                         </div>
+                         
+            			 <div class="pull-right">
+                         	<a class="btn FundsBtn SiteButton" href="<?php echo APPLICATION_URL?>/deposit">Add Funds</a>
+                         </div>
+        
+       					 </div>
+        	 </div>
+    	
+      	    <div class="col-sm-5">
+           
+        	<div class="makediv HNotificationScroll PlansNotify">
+       
+        		<div class="makediv" style="margin-bottom:30px;">
+                		<div class="plantxt" style="margin-bottom:10px;">Prosperity Plans</div>
+                        <div><a data-target="#PlanModal" data-toggle="modal">
+                        <span class="fa fa-plus planplusIcon"></span></a></div>
+                        <?php /*?><div class="pull-right"><a class="bbtn" data-target="#PlanModal" data-toggle="modal">Add Plan</a></div><?php */?>
+				</div>
+                
+				<?php if(!empty($this->getPlanData)){?>
+                <div class="text-center">
+					<? foreach($this->getPlanData as $gkey=>$gvalue)
+					{?>
+                    
+					<div <?php if($gvalue['user_plan_isactive']=='1'){?>class="planBox" <? }else{?>class="planBox planBoxGrey " <? }?> 
+                    style="position:relative;">
+					<div class="planDelete" data-toggle="confirmation" data-element="<?php echo myurl_encode($gvalue["user_plan_id"])?>">
+                   		 <i class="fa fa-times" aria-hidden="true"></i>
+                    </div>
+					<?php echo $gvalue['inv_pl_title']?>
+                   </div>
+                   
+                    
+					<? }?>
+				</div>
+				<? }else{?>
+					<div class="text-center">No Plan Available</div>
+				<? }?>
+        	</div>
+        </div>
+        <div class="col-sm-7">
+        	<div class="investmentcontainerOuter">
+        		<div id="investmentcontainer"></div>
+        	</div>
+        </div>
+         <div class="clearfix"></div>
+    
+         <div class="col-sm-12">
+         		<div class=""  id="myResourcePanel">
+                     	<div class="text-center plantxt">My Resources</div>
+                         <div class="clearfix">&nbsp;</div>
+                         <div>
+                             <a data-target="#ResourcesModal" data-toggle="modal">
+                            		 <span class="fa fa-plus ResourcesModalPlus"></span>
+                             </a>
+                         </div>
+                        <div class="bottom_border"></div>
+                       <?php 
+					   $list_all=array();
+					   // $list_all=scan_dir(RESOURCE_PATH.'/temp/files/');
+					   ?>
+						<?php 
+						if(count($this->paginator)>0){?>
+                       
+                        	 <div class="text-left ResourcesModalScroll">
+
+							<? foreach($this->paginator as $jobAttach){?>
+                             <div class="panel panel-default" style="margin-bottom: 10px;">
+     							 <div class="panel-heading" role="tab" id="heading_res_<?php echo $jobAttach['user_res_id']?>">
+        							<h4 class="panel-title" style="position:relative;">
+                                    	<div class="planDelete" data-toggle="resconfirmation" data-placement="left" data-element="<?php echo myurl_encode($jobAttach["user_res_id"])?>">						<i class="fa fa-times" aria-hidden="true"></i>
+                   						 </div>
+                                    
+        							<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_res_<?php echo $jobAttach['user_res_id']?>" aria-expanded="false" aria-controls="collapse_res_<?php echo $jobAttach['user_res_id']?>" class="resTietle"  <?php if($jobAttach['user_res_isactive']=='0'){?> style="background: grey;color: white;text-decoration: none;" <? }?>>
+                                    	
+         								<?php echo $jobAttach['res_title']?>
+       								 </a>
+      								</h4>
+     							 </div>
+                                 <?php if($jobAttach['user_res_isactive']=='1'){?>
+      							 <div id="collapse_res_<?php echo $jobAttach['user_res_id']?>" class="panel-collapse collapse" 
+                                 role="tabpanel" aria-labelledby="heading_res_<?php echo $jobAttach['user_res_id']?>">
+                                <div class="panel-body">
+                                  <?php echo $jobAttach['res_desc']?>
+                                </div>
+      						</div>
+                            	<? }?>
+   							 </div>
+                         
+                        	<?php /*?><div class="PosRel" style="display:inline-block;margin:15px 10px;vertical-align:top;">
+                        	<div>
+                            <a href="<?php echo HTTP_RESOURCE_PATH.'/temp/files/'.$jobAttach ?>" 
+                            style="text-decoration:none !important;" download>
+                                <?php $fileExtImg=getUploadFileExtension($jobAttach);?>
+                                <img src="<?=HTTP_IMG_PATH?>/icons/<?=$fileExtImg?>" width="100" height="100" />
+                                
+                            </a> 
+                            </div>
+                            <div style="max-width:110px;text-align:center;word-wrap:break-word;">
+                              <a href="<?php echo HTTP_RESOURCE_PATH.'/temp/files/'.$jobAttach ?>" 
+                            style="text-decoration:none!important;font-size: 12px;" download>
+                            <?php echo $jobAttach?>
+                            </a>
+                            </div>
+                      		 </div><?php */?>
+                             
+                             
+                        <? }
+							
+							?>
+                            <?php echo $this->paginationControl($this->paginator, 'Sliding','auth-acl/paginator.phtml', array('page'=>$this->page));?>
+                            <div class="clearfix"></div>
+                            
+                            </div>
+							
+					 <?	}else{ ?>
+							<div class="text-center NoResources">
+                           	<br />
+                            <br />
+            					<i class="fa fa-file nobrief"></i>
+               					 <br />
+               						<span class="nojobtext"> No Resources found</span>
+                           
+                		
+                            <br />
+                            <br />
+             			 </div>
+							
+						<? }?>
+
+						<div class="bottom_border"></div>
+                        </div>
+         	
+         </div>
+         
+          <div class="clearfix">&nbsp;</div>
+          <div class="col-sm-12" style="max-width:900px;margin:0 auto;">
+		<form action="" method="post" class="profile_form" enctype="multipart/form-data" id="profileFormDiv">
+			<div class="form-group">
+            	<label for="user_first_name">How can we improve this page?</label>
+               <?php echo $this->formElement($form->get('user_dashboard_txt'))?>
+            </div>
+        <div class="text-center"><?php echo $this->formElement($form->get('bttnsubmit'))?></div>    
+       </form>
+       </div>
+		</div>
+        <p class="clearfix">&nbsp;</p>
+	</div>
+    </div>
+   </div>
+   
+   <div class="modal fade NewModalDiv" id="PlanModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        
+        <div class="modal-content Clear">
+        	<div class="modal-header">
+            	<div><img src="<?=HTTP_IMG_PATH?>/close_button.png" alt="<?=HTTP_IMG_PATH?>/close_button.png" class="pull-right Cursor" width="24" height="24" data-dismiss="modal" /></div>
+                <div class="DisplayTable">
+                	<div class="DisplayTableCell">Manage Plan</div>
+                </div>
+                <div><hr class="Clear"></div>&nbsp;
+            </div>
+            <div class="modal-body">
+            		<form action="" method="post" class="sample_form" enctype="multipart/form-data" id="popup_box">
+                    <div class="form-group">
+                    	<label for="user_first_name">Select Plan</label>
+              			 <?php echo $this->formElement($form1->get('plan_ids'))?>
+                    </div>
+                    <?php
+					 if(!empty($this->notCount_Title_array)){
+						$notCount_array=implode(",",$this->notCount_Title_array);	
+						echo '<div style="color:#b94a48;font-size:12px;margin-top:10px;">Maximum '.$notCount_array.' reached</div>';
+					}?>
+                     <div class="text-center"><?php echo $this->formElement($form1->get('custom_submit'))?></div>    
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade NewModalDiv" id="ResourcesModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        
+        <div class="modal-content Clear">
+        	<div class="modal-header">
+            	<div><img src="<?=HTTP_IMG_PATH?>/close_button.png" alt="<?=HTTP_IMG_PATH?>/close_button.png" class="pull-right Cursor" width="24" height="24" data-dismiss="modal" /></div>
+                <div class="DisplayTable">
+                	<div class="DisplayTableCell">Manage Resource</div>
+                </div>
+                <div><hr class="Clear"></div>&nbsp;
+            </div>
+            <div class="modal-body">
+            		<form action="" method="post" class="sample_form2" enctype="multipart/form-data" id="res_popup_box">
+                    <div class="form-group">
+                    	<label for="user_first_name">Select Resource</label>
+              			 <?php echo $this->formElement($form2->get('res_id'))?>
+                    </div>
+                    <div class="text-center"><?php echo $this->formElement($form2->get('resource_submit'))?></div>    
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<?php 
+$depositData=explode(",",$this->depositData);
+$withdraw_Data=explode(",",$this->withdraw_Data);
+$weekname1=explode(",",$this->weekname1);
+
+?>
+<script>
+var depositData=[];
+var postedElement=[];
+var withdraw_Data=[];
+var withElement=[];
+var weekname1=[];
+
+depositData=JSON.parse('<?php echo json_encode($depositData)?>');
+withdraw_Data=JSON.parse('<?php echo json_encode($withdraw_Data)?>');
+weekname1=JSON.parse('<?php echo json_encode($weekname1)?>');
+
+var yearData='<?php echo $this->year?>';
+
+$(document).ready(function(e) {
+
+ $(depositData).each(function(index, element) {
+  	element=parseInt(element);
+	postedElement[index]=element;
+}); 
+ $(withdraw_Data).each(function(index, element) {
+  	element=parseInt(element);
+	withElement[index]=element;
+}); 
+ 
+
+  $('[data-toggle="tooltip"]').tooltip();
+   /*$('[data-toggle="tooltip"]').tooltip({trigger: 'manual'}).tooltip('show');*/
+   Highcharts.chart('investmentcontainer', {
+
+    title: {
+        text: 'Investment Performance'
+    },
+
+    subtitle: {
+        text: yearData
+    },
+
+    yAxis: {
+        title: {
+            text: 'Amount($)'
+        }
+    },
+	 xAxis: {
+        title: {
+            text: 'Month',
+			
+        },
+		categories: weekname1
+		//series: [{ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" }]
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top'
+    },
+
+   /* plotOptions: {
+        series: {
+            label: {
+                connectorAllowed: false
+            },
+            pointStart: 2010
+        }
+    },*/
+
+    series: [{
+        name: 'Deposit',
+        data: postedElement
+    },
+	{
+        name: 'Withdraw',
+        data: withElement
+    },
+	
+	],
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
+    }
+
+});
+   
+});
+
+
+</script>

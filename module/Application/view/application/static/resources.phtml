@@ -1,0 +1,97 @@
+
+<?php if(true){?>
+<style>
+
+</style>
+<?php if(true){
+	
+	$list_all=scan_dir(RESOURCE_PATH.'/temp/files/');
+	//prd($list_all);
+	?>
+<div class="staticheadBlock">
+    				<div class="staticchildBlock">
+                    	<div class="container">
+                        	<div class="row">
+        							<div class="staticTextBlock">
+    						Resources<sub><b class="staticsubTextBlock">&nbsp;we provide best you...</b></sub>
+       					 </div>	
+                         	</div>
+       				 	</div>
+                     </div>
+    
+   				 </div>
+                 <div class="contentBlock securityBox">
+					<div class="container">
+							<div class="makediv" style="margin:30px auto;text-align:center;">
+                       <?php /*?> <div class="bottom_border"></div>
+						<div class="bottom_border"></div><?php */?>
+						<?php if(!empty($list_all)){
+							foreach($list_all as $jobAttach){?>
+                        	<div class="PosRel" style="display:inline-block;margin:15px 10px;vertical-align:top;">
+                        	<div>
+                            <a href="<?php echo HTTP_RESOURCE_PATH.'/temp/files/'.$jobAttach ?>" 
+                            style="text-decoration:none !important;" download>
+                                <?php $fileExtImg=getUploadFileExtension($jobAttach);?>
+                                <img src="<?=HTTP_IMG_PATH?>/icons/<?=$fileExtImg?>" width="100" height="100" />
+                                
+                            </a> 
+                            </div>
+                            <div style="max-width:110px;text-align:center;word-wrap:break-word;">
+                              <a href="<?php echo HTTP_RESOURCE_PATH.'/temp/files/'.$jobAttach ?>" 
+                            style="text-decoration:none!important;font-size: 12px;" download>
+                            <?php echo $jobAttach?>
+                            </a>
+                            </div>
+                      		 </div>
+                             
+                             
+                        <? }
+							
+							?>
+                            
+							
+					 <?	}else{ ?>
+							<div class="text-center" style="min-height:300px;margin-top: 50px;">
+                           
+                            <br />
+                            <br />
+            					<i class="fa fa-file nobrief"></i>
+               					 <br />
+               						<span class="nojobtext"> No Resources found</span>
+                           
+                		
+                            <br />
+                            <br />
+             			 </div>
+							
+						<? }?>
+
+						
+                        </div>
+                        
+<?php /*?><div class="makediv" style="margin-top:30px;margin-bottom:30px;">
+		<div><a class="support_about" style="margin:0 auto;">Sign Up</a></div>
+</div>
+
+
+<div class="bottom_border"></div><?php */?>
+                        
+                        
+					</div>
+        
+        	
+        
+        
+        
+        
+        </div>
+
+
+               
+
+
+
+<? }?>
+
+<? }?>
+

@@ -1,0 +1,7 @@
+<?php
+return array(
+     'db' => array(
+		 'username' => 'techdemo_regalin',
+         'password' => '.BCQTTC74M$6',
+     ),
+);

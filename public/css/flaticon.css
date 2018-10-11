@@ -1,0 +1,30 @@
+@font-face {
+	font-family: "Flaticon";
+	src: url("../fonts/flaticon.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+	font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}.flaticon-barrow:before {
+	content: "\e000";
+}
+.flaticon-draft:before {
+	content: "\e001";
+}
+.flaticon-forklift2:before {
+	content: "\e002";
+}
+.flaticon-houses30:before {
+	content: "\e003";
+}
+.flaticon-roller1:before {
+	content: "\e004";
+}
+.flaticon-water78:before {
+	content: "\e005";
+}

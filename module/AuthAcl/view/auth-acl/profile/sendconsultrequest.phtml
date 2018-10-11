@@ -1,0 +1,153 @@
+<style>
+.consult_radio_wrapper .radio input[type=radio]{
+    margin-left: 0px;
+}
+.consult_radio_wrapper{ padding-bottom:15px;}
+.regal_display_none{ display:none;}
+
+.ProfileConDiv{ /*max-width:500px; margin: auto;*/}
+</style>
+    <div id="grad" class="animated fadeIn element_block">
+        <div class="makediv relative">
+        <?php echo $this->render("auth-acl/profile/_profile_side_bar.phtml"); ?>
+        
+        
+            <div class="main-content container">
+                 <div class="ProfileConDiv">
+                 	<div class="panel-body" align="left">
+                    
+                 	
+                    <form action="" method="post" class="profile_form" enctype="multipart/form-data" id="sendConsultRequestFormDiv">
+                        
+                        <div class="form-group" style="max-width:300px;margin:20px auto;">
+                            <label for="consult_req_date_lbl">Select Consulting Request Date</label>
+                           <?php echo $this->formElement($form->get('consult_request_date'))?>
+                        </div>
+                        <div class="col-sm-12" style="max-width:450px;margin:0 auto;">
+                        <div class="consult_time_slot_wrapper">
+                        
+                        	<div class="regal_display_none text-center">
+                                <label for="consult_req_time_slot_lbl">Select Time Slot</label>
+                                <br />
+                            </div>
+                            
+                            <div class="row consult_radio_wrapper" style="background: rgba(252, 209, 22, 0.57);padding: 10px 0;margin-bottom: 30px;">
+                               <?php /*?> <input type="radio" name="time_slot"  value="1" class="required" aria-required="true">
+                                <span>10:00 - 10:45</span><?php */?>
+                                <div class="text-center" style="font-size:50px;"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+                                <div class="text-center" style="font-weight: bold;margin-top: 10px;text-transform: uppercase;">Select Consulting Request Date</div>
+                            </div>
+                            
+                        </div>
+                        </div>
+                        
+                        <div class="clearfix"></div>
+                        <div class="clearfix"></div>
+                    <div class="text-center regal_display_none"><?php echo $this->formElement($form->get('bttnsubmit'))?></div>    
+                   </form>
+                   </div>
+                </div>
+                <p class="clearfix">&nbsp;</p>
+            </div>
+        </div>
+    </div>
+   
+<?php 
+$closing_days=$this->getConsultSettingData['closing_days'];
+$closing_data=explode(",",$closing_days);
+?>
+<script>
+
+$(function(){
+	//$('#consult_request_date').attr("readonly","readonly");
+	var currentYear = (new Date).getFullYear();
+	var currentMonth = (new Date).getMonth() + 1;
+	var closing_data = []; var date_parse=[];
+	var closing_data = <?php echo json_encode($closing_data); ?>;
+	
+$("#consult_request_date").keypress(function(event) {event.preventDefault();});
+ $('#consult_request_date').bind("paste",function(e) {
+      e.preventDefault();
+   });
+ 		$('#consult_request_date').datetimepicker({
+			
+			timepicker:false,
+			format:'d-m-Y',
+			formatDate:'Y-m-d',
+			minDate: new Date(),
+        	maxDate: new Date(new Date().setMonth(new Date().getMonth() + 2)),
+			scrollInput : false,
+			onSelectDate: function (consultDate) {
+				
+				 var selectedDate = consultDate.getDate()+'-'+parseInt(consultDate.getMonth()+1)+'-'+consultDate.getFullYear();
+				
+					$.ajax({
+					url: baseUrl+"/prepare-time-slots",
+					type: 'POST',
+					data: ({selectedDate:selectedDate}),
+					success: function(responsedata)
+					{  
+						var data = $.parseJSON(responsedata);
+						
+						var SlotHtml='';
+						$('.consult_radio_wrapper').html('');
+						$('.time_not_available').remove();
+						if(data!=null){
+							$('.consult_time_slot_wrapper>div').removeClass('regal_display_none');
+							$('.upload-result').parent('div').removeClass('regal_display_none');
+							$.each(data,function(index, element) {
+								$('.consult_radio_wrapper').append('<div class="col-lg-4 col-sm-4 col-xs-12"><input type="radio" name="start_end_time_slot"  value="'+data[index].startTime+'_'+data[index].EndTime+'" class="required"><span>'+data[index].startTime+'-'+data[index].EndTime+'</span></div>');
+							});
+							
+							$('.consult_radio_wrapper').append('<div class="col-sm-12" style="clear:both;"><span for="start_end_time_slot" class="help-block" style="display:none">This field is required.</span></div>');
+							
+						}else{
+							$('.consult_time_slot_wrapper>div:first').addClass('regal_display_none');
+							$('.upload-result').parent('div').addClass('regal_display_none');
+							$('.consult_time_slot_wrapper .consult_radio_wrapper').before("<div class='time_not_available'>Time Not Available</div>");
+						}
+					}
+				});
+			}, 
+			beforeShowDay: function (date) {
+				//console.log(date.getDate()); console.log(closing_data);
+				var num = date.getDate();
+					var n = num.toString();
+				if ($.inArray(n, closing_data)=='-1') {
+					return [true, ''];
+				}
+       			 return [false, ''];
+       		},
+    
+			
+			
+			
+	 });
+});
+
+/*$(document).on('change','#consult_request_date',function(e){
+	var selectedDate = $(this).val();
+	$.ajax({
+			url: baseUrl+"/prepare-time-slots",
+			type: 'POST',
+			data: ({selectedDate:selectedDate}),
+			success: function(responsedata)
+			{  
+				var data = $.parseJSON(responsedata);
+				var SlotHtml='';//console.log(data);
+				$(data).each(function(index, element) {
+					//alert(element);
+					$('.consult_radio_wrapper').append('<input type="radio" name="time_slot"  value="1" class="required"><span>10:00 - 10:45</span>');
+				});
+				
+				<?php /*?> <input type="radio" name="time_slot"  value="1" class="required">
+                 <span>10:00 - 10:45</span><?php */?>
+			}
+		});
+	
+});*/
+
+  
+</script>
+
+

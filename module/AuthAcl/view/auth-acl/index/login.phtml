@@ -1,0 +1,70 @@
+<link href="<?php echo APPLICATION_URL?>/public/assets/css/components.css" media="screen" rel="stylesheet" type="text/css">
+<div class="makediv login_box" style="margin-top:0;">
+<div class="login_strate_box_top">
+<div class="strate_box_top_inner">
+<div class="strate_box_top_panel" >
+<div class="registration-box-bg" >
+	<?php /*?><div class="text-center"><h1>Log In</h1></div><?php */?>
+    <div class="text-center">
+                   <a href="<?php echo APPLICATION_URL?>"> <img src="<?php echo HTTP_IMG_PATH?>/logo.png" style=" margin:0px auto 30px auto;max-width:100%;" /></a>
+</div>
+	<div>
+    	<div class="loginbox">
+        	<div class="text-left makediv">
+            
+            	
+                	
+            		<form action="" method="post" class="profile_form j-forms" enctype="multipart/form-data" >
+                    	<div class="row">
+                        	<div class="col-md-12">
+                            	<div class="unit">
+                                <div class="input login-input form-group">
+                                    <label class="icon-left" for="login"> <i class="fa fa-user"></i> </label>
+                                    <?= $this->formElement($form->get('user_email')); ?>
+                                </div>
+                           		 </div>
+                            	<?php /*?><div class="form-group">
+                                	<label for="user_email">Email address</label>
+                            		<?php echo $this->formElement($form->get('user_email'))?>
+                                </div><?php */?>
+                                <div class="unit">
+                                <div class="input login-input form-group" id="showpassword">
+                                    <label class="icon-left" for="password"> <i class="fa fa-key"></i> </label>
+                                    <?= $this->formElement($form->get('user_password')); ?>
+                                    
+                                </div>
+                            </div>
+                               <?php /*?> <div class="form-group" id="showpassword">
+                                	<label for="user_password" style="display:block">Password</label>
+                            		<?php echo $this->formElement($form->get('user_password'))?>
+                                </div><?php */?>
+                                <div class="form-group text-center">
+                                	<button class="btn SiteButton" type="submit">Submit</button>
+                                </div>
+                              
+                                <div class="form-group">
+                                	<a href="<?php echo $this->url('register')?>" class="pull-left nblink">Sign Up</a>
+                                    <a href="<?php echo $this->url('forgot_password')?>" class="pull-right nblink">Forgot Password?</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+            	</div>
+            
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+</div>
+<div class="login-page-footer">
+                        <div class="">
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <div class="footer-content"> <span class="footer-meta"> <?=$this->site_configs['site_title']?> &copy; <?php echo gmdate('Y')?></span> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+</div>
+</div>
+</div>

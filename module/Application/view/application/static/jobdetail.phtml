@@ -1,0 +1,69 @@
+<div class="staticheadBlock" style="min-height:180px;padding:30px 0 15px;">
+    				<div class="staticchildBlock">
+                    	<div class="container">
+                        	<div class="" style="color:#fff;font-size:18px;text-align:center;">
+                            		<?php echo nl2br($this->getjobData["job_title"]);?>	
+                         	</div>
+                            
+                            <?php /*?><?php */?>
+       				 	</div>
+                     </div>
+    
+   				 </div>
+                 <div class="contentBlock securityBox">
+<div class="container">
+<div class="">	
+	<div class="clearfix service_text_boxAbout" style="margin-top:30px;"><a class="support_about" href="<?php echo APPLICATION_URL?>/career" style="margin:0 0 0 auto;">Go To Job Listing</a></div>
+	<div class="overview_intro makediv" style="margin-top:20px;max-width:100%;">
+	
+    <?php echo $this->getjobData["job_desc"];?>	    
+	</div>
+    <div class="clearfix">&nbsp;</div> 
+    <div class="clearfix">&nbsp;</div> 
+    
+    <div class="bottom_border"></div>
+    <div class="clearfix">&nbsp;</div> 
+    <div class="clearfix">&nbsp;</div> 
+    <div class="form-box" style="background: #f3f3f3;padding: 20px;position:relative;padding-top: 90px;max-width:650px;margin:0 auto;">
+                    	<?php /*?><?php echo $this->renderForm($this->form); ?><?php */?>
+                       	<div style="position:absolute;top: -16px;left: -1px;"><img src="<?php echo HTTP_IMG_PATH?>/applynow.png"  /></div>  
+						<?php echo $this->form()->openTag($this->form);?>
+                        <div class="form-group">
+                            <label class="form-label" for="apply_user_name">Name</label>
+                            <?php echo $this->formElement($this->form->get('job_app_name'));?>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="apply_user_email">Email Address</label>
+                            <?php echo $this->formElement($this->form->get('job_app_email'));?>
+                        </div>
+                        <div class="form-group">
+                        	<label class="form-label" for="apply_user_phone">Phone Number</label>
+                        	<?php echo $this->formElement($this->form->get('job_app_phone'));?>
+                        </div>
+                        <div class="form-group">
+                        	<label class="form-label" for="apply_user_detail">Detail</label>
+                        	<?php echo $this->formElement($this->form->get('job_app_detail'));?>
+                        </div>
+                        <div class="form-group">
+                        	<label class="form-label" for="apply_user_file">Attachment&nbsp;(Valid Extensions : <?php echo DOCUMENT_VALID_EXTENTIONS?>)</label>
+                        	<?php echo $this->formElement($this->form->get('job_app_file'));?>
+                        </div>
+                        
+               			 <div style="margin-top:20px; " class="text-center">
+                        	<?php echo $this->formElement($this->form->get('bttnsubmit')); ?>
+                        </div>
+                        <?php echo $this->form()->closeTag($this->form); ?>
+                    </div>
+                  
+               
+     <div class="clearfix">&nbsp;</div> 
+    <div class="clearfix">&nbsp;</div> 
+    
+    
+    
+    <div class="clearfix">&nbsp;</div> 
+    <div class="clearfix">&nbsp;</div> 
+  </div>
+
+</div>
+</div>
